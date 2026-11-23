@@ -7,28 +7,27 @@
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Serif+Thai:wght@400;500;600&family=Sarabun:wght@300;400;500;600&family=Amiri:wght@400;700&family=Alex+Brush&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+Thai:wght@400;500;600&family=Sarabun:wght@300;400;500;600&family=Amiri:wght@400;700&family=Alex+Brush&display=swap" rel="stylesheet">
 
 <style>
   /* ==========================================================
-     1) CSS VARIABLES & COOL ICE BLUE THEME
+     1) UI VARIABLES — FROSTED SKY & EDITORIAL SERIF
   ========================================================== */
   :root {
-    --bg-gradient: linear-gradient(180deg, #eef5fc 0%, #dceaf7 52%, #c7dcf0 100%);
-    --panel-gradient: linear-gradient(145deg, #f8fbff 0%, #dbe9f6 100%);
-    --card-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.92) 0%, rgba(232, 243, 253, 0.88) 100%);
-    --gold-gradient: linear-gradient(135deg, #5e8bb4 0%, #3f688f 100%);
-    --gold-hover: linear-gradient(135deg, #6c9bc4 0%, #4b779e 100%);
-    --accent-ice: #8fb8dc;
-    --cream: #223b52;        /* สีตัวอักษรหลัก (น้ำเงินเข้มเย็นตา อ่านง่าย) */
-    --muted: #527494;        /* ตัวอักษรรอง (ฟ้าอมเทา) */
-    --border-soft: rgba(94, 139, 180, 0.28);
+    --sky-bg:
+      radial-gradient(circle at 15% 10%, rgba(255, 255, 255, 0.85) 0%, transparent 45%),
+      radial-gradient(circle at 85% 22%, rgba(173, 212, 242, 0.55) 0%, transparent 50%),
+      linear-gradient(180deg, #eff6fc 0%, #dcebf8 52%, #c5ddf2 100%);
+    --glass-surface: rgba(255, 255, 255, 0.66);
+    --glass-strong: rgba(255, 255, 255, 0.84);
+    --glass-border: rgba(255, 255, 255, 0.78);
+    --line-blue: rgba(74, 122, 166, 0.24);
+    --btn-grad: linear-gradient(135deg, #5687b5 0%, #38628a 100%);
+    --btn-hover: linear-gradient(135deg, #6598c7 0%, #42709c 100%);
+    --ink-main: #1b344c;
+    --ink-sub: #4d7294;
     --font-display: 'Cormorant Garamond', 'Noto Serif Thai', serif;
     --font-body: 'Sarabun', sans-serif;
-    --space-1: 0.5rem;
-    --space-2: 1rem;
-    --space-3: 2rem;
-    --space-4: 4rem;
   }
 
   html {
@@ -42,34 +41,77 @@
 
   body {
     margin: 0;
-    background: var(--bg-gradient);
+    background: var(--sky-bg);
     background-attachment: fixed;
-    color: var(--cream);
+    color: var(--ink-main);
     font-family: var(--font-body);
-    line-height: 1.7;
-    padding-bottom: 120px;
+    line-height: 1.75;
+    padding-bottom: 124px;
     overflow-x: hidden;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
   }
 
-  h1, h2 {
+  h1, h2, h3 {
     font-family: var(--font-display);
     font-weight: 500;
     margin: 0;
   }
 
   section {
-    max-width: 640px;
+    max-width: 620px;
     margin: 0 auto;
-    padding: var(--space-4) var(--space-3);
+    padding: 3.5rem 1.5rem;
     text-align: center;
     width: 100%;
+    position: relative;
+    z-index: 2;
+  }
+
+  .section-kicker {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1rem;
+    letter-spacing: 0.14em;
+    color: var(--ink-sub);
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+
+  .section-title {
+    font-size: clamp(1.85rem, 5vw, 2.35rem);
+    color: var(--ink-main);
+    letter-spacing: 0.02em;
+  }
+
+  .ornament-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin: 1.15rem auto 2rem auto;
+    max-width: 220px;
+  }
+
+  .ornament-line::before,
+  .ornament-line::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(56, 98, 138, 0.45), transparent);
+  }
+
+  .ornament-diamond {
+    width: 7px;
+    height: 7px;
+    transform: rotate(45deg);
+    background: #4a7aa6;
+    opacity: 0.75;
   }
 
   /* ==========================================================
-     BACKGROUND FLOATING FLOWERS
+     FLOATING FLOWERS
   ========================================================== */
   #flowerContainer {
     position: fixed;
@@ -92,12 +134,8 @@
       transform: translateY(0) rotate(0deg) translateX(0);
       opacity: 0;
     }
-    15% {
-      opacity: 0.85;
-    }
-    85% {
-      opacity: 0.85;
-    }
+    15% { opacity: 0.85; }
+    85% { opacity: 0.85; }
     100% {
       transform: translateY(-110vh) rotate(360deg) translateX(60px);
       opacity: 0;
@@ -105,7 +143,7 @@
   }
 
   /* ==========================================================
-     2) ENVELOPE INTRO
+     ENVELOPE INTRO
   ========================================================== */
   body.intro-active { overflow: hidden; }
 
@@ -120,11 +158,11 @@
     text-align: center;
     padding: 2.5rem 1.5rem;
     background:
-      linear-gradient(135deg, rgba(24, 46, 68, 0.62) 0%, rgba(12, 26, 40, 0.82) 100%),
+      linear-gradient(155deg, rgba(22, 46, 70, 0.64) 0%, rgba(11, 25, 40, 0.84) 100%),
       url('444444.jpg') center/cover no-repeat,
-      radial-gradient(circle at center, #294b6b 0%, #102030 100%);
-    color: #eef6fc;
-    transition: opacity 1.2s ease, visibility 1.2s ease;
+      radial-gradient(circle at center, #294e73 0%, #0f2033 100%);
+    color: #f2f8fd;
+    transition: opacity 1.1s ease, visibility 1.1s ease;
     cursor: pointer;
   }
 
@@ -140,26 +178,26 @@
   }
 
   #envelopeIntro .eyebrow {
-    font-size: 0.9rem;
-    letter-spacing: 0.35em;
+    font-size: 0.85rem;
+    letter-spacing: 0.36em;
     text-transform: uppercase;
-    color: #dcebf7;
-    margin-top: var(--space-2);
+    color: #d7e9f8;
+    margin-top: 0.85rem;
   }
 
   #envelopeIntro .couple-script {
     font-family: 'Alex Brush', cursive;
-    font-size: clamp(2.8rem, 9vw, 4.2rem);
-    line-height: 1.15;
-    color: #f4f9fd;
-    margin-top: 0.2rem;
-    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+    font-size: clamp(2.9rem, 9vw, 4.3rem);
+    line-height: 1.12;
+    color: #ffffff;
+    margin-top: 0.25rem;
+    text-shadow: 0 3px 16px rgba(0, 0, 0, 0.35);
   }
 
   #envelopeIntro .open-hint {
     font-size: 0.9rem;
     letter-spacing: 0.08em;
-    color: #e3f0fa;
+    color: #e6f2fc;
     animation: pulseText 1.8s infinite ease-in-out;
   }
 
@@ -168,13 +206,12 @@
     50% { opacity: 1; transform: scale(1); }
   }
 
-  /* โครงสร้างซองจดหมาย 3D โทนฟ้าเย็น */
   .envelope-wrapper {
     width: 280px;
     height: 190px;
     position: relative;
     perspective: 1000px;
-    margin: 1.5rem auto 0 auto;
+    margin: 1.4rem auto 0 auto;
   }
 
   .envelope {
@@ -182,15 +219,15 @@
     height: 100%;
     position: relative;
     background: #dceaf7;
-    border-radius: 8px;
-    box-shadow: 0 20px 40px rgba(10, 25, 40, 0.35);
+    border-radius: 10px;
+    box-shadow: 0 22px 44px rgba(7, 18, 30, 0.42);
   }
 
   .envelope-inner {
     position: absolute;
     inset: 0;
-    background: #c5d9ec;
-    border-radius: 8px;
+    background: #c2d8ec;
+    border-radius: 10px;
     overflow: hidden;
     z-index: 1;
   }
@@ -202,8 +239,8 @@
     width: 92%;
     height: 88%;
     background: #f9fcff;
-    border-radius: 6px;
-    box-shadow: 0 4px 12px rgba(24, 46, 68, 0.14);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(22, 46, 70, 0.14);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -211,20 +248,20 @@
     padding: 1rem;
     transition: transform 1.1s cubic-bezier(0.25, 1, 0.5, 1) 0.4s;
     z-index: 2;
-    border: 1px solid #c9ddef;
+    border: 1px solid #c7ddf0;
   }
 
   .envelope-card .card-title {
     font-family: 'Alex Brush', cursive;
-    font-size: 1.8rem;
-    color: var(--cream);
+    font-size: 1.85rem;
+    color: var(--ink-main);
   }
 
   .envelope-card .card-sub {
     font-family: var(--font-display);
     font-size: 0.75rem;
-    letter-spacing: 0.15em;
-    color: var(--muted);
+    letter-spacing: 0.14em;
+    color: var(--ink-sub);
     text-transform: uppercase;
   }
 
@@ -234,7 +271,7 @@
     width: 0; height: 0;
     border-top: 95px solid transparent;
     border-bottom: 95px solid transparent;
-    border-left: 140px solid #cfe1f2;
+    border-left: 140px solid #cee0f1;
     z-index: 3;
     pointer-events: none;
   }
@@ -245,7 +282,7 @@
     width: 0; height: 0;
     border-top: 95px solid transparent;
     border-bottom: 95px solid transparent;
-    border-right: 140px solid #cfe1f2;
+    border-right: 140px solid #cee0f1;
     z-index: 3;
     pointer-events: none;
   }
@@ -257,7 +294,7 @@
     margin: 0 auto;
     border-left: 140px solid transparent;
     border-right: 140px solid transparent;
-    border-bottom: 105px solid #bdd4ea;
+    border-bottom: 105px solid #bbd3ea;
     z-index: 4;
     pointer-events: none;
   }
@@ -269,11 +306,11 @@
     margin: 0 auto;
     border-left: 140px solid transparent;
     border-right: 140px solid transparent;
-    border-top: 105px solid #aec9e2;
+    border-top: 105px solid #abc7e2;
     transform-origin: top center;
     transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), z-index 0s ease 0.4s;
     z-index: 5;
-    filter: drop-shadow(0 3px 5px rgba(16, 32, 48, 0.16));
+    filter: drop-shadow(0 3px 5px rgba(15, 32, 51, 0.18));
   }
 
   .envelope-seal {
@@ -284,18 +321,16 @@
     width: 58px;
     height: 58px;
     border-radius: 50%;
-    background: radial-gradient(circle at 35% 35%, #739ec4 0%, #487196 70%, #325371 100%);
-    border: 1px solid rgba(235, 246, 255, 0.55);
-    box-shadow: 0 6px 14px rgba(12, 26, 40, 0.32), inset 0 2px 4px rgba(255, 255, 255, 0.35);
+    background: radial-gradient(circle at 35% 35%, #6f9bc4 0%, #436d94 70%, #2d4e6e 100%);
+    border: 1px solid rgba(235, 246, 255, 0.6);
+    box-shadow: 0 6px 14px rgba(11, 25, 40, 0.35), inset 0 2px 4px rgba(255, 255, 255, 0.35);
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: 'Alex Brush', cursive;
-    font-weight: 400;
     color: #f4f9fd;
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     padding-top: 2px;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
     z-index: 6;
     transition: opacity 0.4s ease, transform 0.4s ease;
   }
@@ -315,61 +350,7 @@
   }
 
   /* ==========================================================
-     3) ส่วนแสดงรูปภาพการ์ดแต่งงาน
-  ========================================================== */
-  .card-preview-section {
-    padding-top: var(--space-4);
-    padding-bottom: var(--space-2);
-    padding-left: 0;
-    padding-right: 0;
-    width: 100%;
-    max-width: 1000px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-
-  @media (min-width: 768px) {
-    #cardImage1 {
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    #cardImage2 {
-      max-width: 520px;
-      margin: 0 auto;
-    }
-  }
-
-  .card-img-wrapper {
-    position: relative;
-    background: transparent;
-    border: none;
-    box-shadow: none;
-    border-radius: 0;
-    overflow: visible;
-  }
-
-  .card-img-wrapper img {
-    width: 100%;
-    height: auto;
-    display: block;
-    image-rendering: -webkit-optimize-contrast;
-    transform: translateZ(0);
-    filter: drop-shadow(0 10px 25px rgba(34, 59, 82, 0.12));
-  }
-
-  .divider {
-    width: 64px;
-    height: 2px;
-    background: linear-gradient(90deg, transparent 0%, #5e8bb4 50%, transparent 100%);
-    margin: var(--space-3) auto;
-    opacity: 0.85;
-  }
-
-  /* ==========================================================
-     4) SCROLL REVEAL ANIMATION
+     REVEAL ANIMATION
   ========================================================== */
   .reveal {
     opacity: 0;
@@ -382,147 +363,291 @@
   }
 
   /* ==========================================================
-     5) COUNTDOWN
+     1) INVITATION GALLERY SHOWCASE
   ========================================================== */
-  .countdown {
-    display: flex;
-    justify-content: center;
-    gap: 0.8rem;
-    margin-top: var(--space-3);
-    flex-wrap: nowrap;
-    width: 100%;
-    max-width: 380px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .countdown .box {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.94) 0%, rgba(214, 232, 248, 0.92) 100%);
-    border: 1px solid var(--border-soft);
-    border-radius: 12px;
-    padding: 0.8rem 0.6rem;
-    aspect-ratio: 3 / 4;
-    flex: 1;
-    min-width: 0;
+  .card-preview-section {
+    padding-top: 3rem;
+    padding-bottom: 1.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    max-width: 960px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    gap: 1.5rem;
+  }
+
+  .card-frame {
+    background: var(--glass-surface);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 26px;
+    padding: 0.75rem;
+    box-shadow: 0 18px 40px rgba(33, 66, 97, 0.1);
+  }
+
+  .card-frame img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 20px;
+  }
+
+  @media (min-width: 768px) {
+    #cardImage1 {
+      max-width: 920px;
+      margin: 0 auto;
+    }
+    #cardImage2 {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+  }
+
+  /* ==========================================================
+     2) RING COUNTDOWN UI
+  ========================================================== */
+  .ring-countdown {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .ring-item {
+    background: var(--glass-surface);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 22px;
+    padding: 0.9rem 0.35rem 0.75rem 0.35rem;
+    box-shadow: 0 10px 26px rgba(33, 66, 97, 0.08);
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    box-shadow: 0 8px 20px rgba(63, 104, 143, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.85);
-    overflow: visible;
   }
 
-  .countdown .box strong {
-    display: inline-block;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.8rem;
-    background: linear-gradient(135deg, #47749c 0%, #1e354b 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    line-height: 1.2;
-    margin-top: 0.1rem;
+  .ring-wrap {
+    position: relative;
+    width: 68px;
+    height: 68px;
+    display: grid;
+    place-items: center;
+  }
+
+  .ring-wrap svg {
+    width: 68px;
+    height: 68px;
+    transform: rotate(-90deg);
+  }
+
+  .ring-track {
+    fill: none;
+    stroke: rgba(74, 122, 166, 0.16);
+    stroke-width: 4.5;
+  }
+
+  .ring-progress {
+    fill: none;
+    stroke: #4676a3;
+    stroke-width: 4.5;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.45s ease;
+  }
+
+  .ring-num {
+    position: absolute;
+    font-family: var(--font-display);
+    font-size: 1.5rem;
     font-weight: 600;
-    padding-right: 0.25em;
-    margin-right: -0.25em;
+    color: var(--ink-main);
+    line-height: 1;
   }
 
-  .countdown .box span {
-    font-size: 0.75rem;
-    color: var(--muted);
-    letter-spacing: 0.03em;
-    margin-bottom: 0.2rem;
+  .ring-label {
+    margin-top: 0.45rem;
+    font-size: 0.78rem;
+    color: var(--ink-sub);
     font-weight: 500;
   }
 
   /* ==========================================================
-     6) ดุอาและฮาดิษอวยพร
+     3) ARCH DUA CARD & INTERACTIVE TABS
   ========================================================== */
-  .dua-card {
-    background: var(--card-bg);
-    backdrop-filter: blur(8px);
-    border-radius: 16px;
-    padding: 1.6rem 1.4rem;
-    margin-top: 1.25rem;
-    text-align: center;
-    box-shadow: 0 8px 25px rgba(63, 104, 143, 0.1);
-    border: 1px solid var(--border-soft);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .dua-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #8fb8dc 0%, #4b779e 50%, #8fb8dc 100%);
-  }
-
-  .dua-tag {
+  .dua-tabs {
     display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-    background: var(--gold-gradient);
-    color: #f7fbff;
-    font-size: 0.8rem;
-    padding: 0.25rem 0.85rem;
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 999px;
+    padding: 0.28rem;
+    gap: 0.25rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 6px 18px rgba(33, 66, 97, 0.06);
+  }
+
+  .dua-tab-btn {
+    border: none;
+    background: transparent;
+    color: var(--ink-sub);
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0.45rem 1rem;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .dua-tab-btn.active {
+    background: var(--btn-grad);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(56, 98, 138, 0.25);
+  }
+
+  .arch-dua-card {
+    background: var(--glass-strong);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid var(--glass-border);
+    border-radius: 140px 140px 26px 26px;
+    padding: 2.5rem 1.75rem 2rem 1.75rem;
+    box-shadow: 0 16px 38px rgba(33, 66, 97, 0.1);
+    position: relative;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .arch-dua-card.switching {
+    opacity: 0.25;
+    transform: translateY(6px);
+  }
+
+  .arch-badge {
+    display: inline-block;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    color: #38628a;
+    background: rgba(133, 181, 224, 0.24);
+    border: 1px solid rgba(74, 122, 166, 0.22);
+    padding: 0.22rem 0.9rem;
     border-radius: 999px;
     margin-bottom: 1rem;
     font-weight: 500;
-    box-shadow: 0 3px 10px rgba(63, 104, 143, 0.25);
   }
 
   .arabic-text {
     font-family: 'Amiri', serif;
-    font-size: 1.45rem;
-    line-height: 2;
-    color: #182b3d;
-    margin: 0.5rem 0 1rem 0;
+    font-size: clamp(1.38rem, 4vw, 1.65rem);
+    line-height: 2.05;
+    color: var(--ink-main);
+    margin: 0.35rem 0 1.15rem 0;
     direction: rtl;
   }
 
   .thai-translation {
-    font-size: 0.92rem;
-    color: #37536e;
-    line-height: 1.6;
-    margin: 0;
+    font-size: 0.95rem;
+    color: var(--ink-sub);
+    line-height: 1.7;
+    margin: 0 auto;
+    max-width: 480px;
   }
 
   /* ==========================================================
-     7) เขียนคำอวยพร (GUESTBOOK) & MARQUEE
+     4) GUESTBOOK FORM & FLOATING PILL MARQUEE
   ========================================================== */
-  .wish-form-card {
-    background: var(--card-bg);
-    backdrop-filter: blur(8px);
-    border-radius: 16px;
-    padding: 1.5rem;
-    border: 1px solid var(--border-soft);
-    box-shadow: 0 8px 25px rgba(63, 104, 143, 0.1);
+  .glass-panel {
+    background: var(--glass-strong);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid var(--glass-border);
+    border-radius: 26px;
+    padding: 1.6rem;
+    box-shadow: 0 14px 34px rgba(33, 66, 97, 0.09);
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  input, textarea {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid var(--line-blue);
+    color: var(--ink-main);
+    padding: 0.85rem 1.05rem;
+    border-radius: 14px;
+    font-family: var(--font-body);
+    font-size: 0.98rem;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  textarea {
+    min-height: 92px;
+    resize: vertical;
+  }
+
+  input:focus, textarea:focus {
+    outline: none;
+    border-color: #4676a3;
+    box-shadow: 0 0 0 3px rgba(70, 118, 163, 0.14);
+  }
+
+  button[type="submit"] {
+    background: var(--btn-grad);
+    color: #ffffff;
+    border: none;
+    padding: 0.92rem 1.5rem;
+    border-radius: 999px;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(56, 98, 138, 0.26);
+    transition: transform 0.2s ease, background 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  button[type="submit"]:hover:not(:disabled) {
+    background: var(--btn-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(56, 98, 138, 0.34);
+  }
+
+  button[type="submit"]:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  .wishes-board-label {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    color: var(--ink-main);
+    margin: 2.2rem 0 0.85rem 0;
   }
 
   .marquee-fullscreen-group {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.6rem;
     width: 100vw;
     position: relative;
     left: 50%;
     transform: translateX(-50%);
-    padding: 0.5rem 0;
+    padding: 0.25rem 0;
   }
 
   .marquee-wrap {
     overflow: hidden;
     width: 100%;
-    height: 32px;
-    background: rgba(244, 250, 255, 0.72);
+    height: 40px;
+    background: rgba(255, 255, 255, 0.36);
     backdrop-filter: blur(6px);
-    border-top: 1px solid var(--border-soft);
-    border-bottom: 1px solid var(--border-soft);
-    padding: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.55);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.55);
     display: flex;
     align-items: center;
-    box-shadow: 0 2px 8px rgba(34, 59, 82, 0.04);
   }
 
   .marquee-track {
@@ -545,166 +670,157 @@
   }
 
   .wish {
-    background: transparent;
-    border: none;
-    border-radius: 0;
-    padding: 0.35rem 1.1rem;
-    margin: 0 1.2rem;
+    background: rgba(255, 255, 255, 0.88);
+    border: 1px solid rgba(74, 122, 166, 0.22);
+    border-radius: 999px;
+    padding: 0.28rem 1rem;
+    margin: 0 0.65rem;
     white-space: nowrap;
-    font-size: 0.9rem;
-    color: var(--cream);
+    font-size: 0.86rem;
+    color: var(--ink-main);
     font-weight: 500;
+    box-shadow: 0 3px 10px rgba(33, 66, 97, 0.06);
   }
 
   /* ==========================================================
-     8) รายละเอียดงาน & การติดต่อ
+     5) EVENT TIMELINE & CONTACTS
   ========================================================== */
-  .info-card, .contact-card {
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.92) 0%, rgba(224, 238, 251, 0.9) 100%);
-    backdrop-filter: blur(8px);
-    border-radius: 20px;
-    padding: var(--space-3);
-    margin-top: var(--space-2);
-    border: 1px solid var(--border-soft);
-    box-shadow: 0 10px 30px rgba(63, 104, 143, 0.1);
+  .timeline-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    text-align: left;
   }
 
-  .info-item {
+  .timeline-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(255, 255, 255, 0.68);
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    border-radius: 18px;
+    padding: 0.9rem 1.1rem;
+  }
+
+  .timeline-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 14px;
+    background: rgba(86, 135, 181, 0.16);
+    color: #356087;
+    display: grid;
+    place-items: center;
+    font-size: 1.05rem;
+    flex-shrink: 0;
+  }
+
+  .timeline-meta {
+    font-size: 0.78rem;
+    color: var(--ink-sub);
+    display: block;
+  }
+
+  .timeline-val {
+    font-size: 0.96rem;
+    color: var(--ink-main);
+    font-weight: 600;
+  }
+
+  .swatch-row {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 0.35rem;
-    margin: var(--space-1) 0;
-    color: var(--muted);
-    flex-wrap: wrap;
-    font-size: 0.95rem;
+    gap: 0.85rem;
+    margin-top: 1.4rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--line-blue);
   }
 
-  .info-item strong {
-    color: var(--cream);
+  .swatch-dot {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2.5px solid #ffffff;
+    box-shadow: 0 4px 10px rgba(27, 52, 76, 0.16);
   }
 
   .map-btn {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    background: var(--gold-gradient);
-    color: #f7fbff;
-    padding: 0.85rem 1.75rem;
+    background: var(--btn-grad);
+    color: #ffffff;
+    padding: 0.85rem 1.8rem;
     border-radius: 999px;
     text-decoration: none;
     font-weight: 500;
-    margin-top: 1rem;
-    box-shadow: 0 6px 18px rgba(63, 104, 143, 0.28);
-    transition: all 0.3s ease;
+    margin-top: 1.4rem;
+    box-shadow: 0 8px 20px rgba(56, 98, 138, 0.26);
+    transition: transform 0.2s ease, background 0.25s ease;
   }
+
   .map-btn:hover {
-    background: var(--gold-hover);
+    background: var(--btn-hover);
     transform: translateY(-2px);
-    box-shadow: 0 8px 22px rgba(63, 104, 143, 0.38);
   }
 
   .contact-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.25rem 0.5rem;
+    gap: 0.9rem;
   }
 
-  .contact-item {
-    text-align: center;
+  .contact-tile {
+    background: rgba(255, 255, 255, 0.68);
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    border-radius: 18px;
+    padding: 1rem 0.75rem;
   }
 
-  .contact-item strong {
-    color: var(--cream);
+  .contact-tile strong {
     display: block;
-    font-size: 0.95rem;
+    font-size: 0.88rem;
+    color: var(--ink-sub);
+    font-weight: 500;
     margin-bottom: 0.2rem;
   }
 
-  .contact-item p {
-    margin: 0;
-    color: var(--muted);
-    font-size: 0.85rem;
-  }
-
-  .contact-item a {
-    color: var(--cream);
+  .contact-tile a {
+    color: var(--ink-main);
     text-decoration: none;
     font-weight: 600;
-  }
-  .contact-item a:hover { text-decoration: underline; }
-
-  /* ==========================================================
-     9) ฟอร์มคำอวยพร
-  ========================================================== */
-  form { display: flex; flex-direction: column; gap: var(--space-2); }
-
-  input, textarea {
-    background: rgba(255, 255, 255, 0.95);
-    border: 1px solid rgba(94, 139, 180, 0.38);
-    color: var(--cream);
-    padding: 0.85rem 1rem;
-    border-radius: 10px;
-    font-family: var(--font-body);
-    font-size: 1rem;
-    box-shadow: inset 0 2px 4px rgba(34, 59, 82, 0.03);
-    transition: border-color 0.3s ease;
+    font-size: 0.98rem;
   }
 
-  input:focus, textarea:focus {
-    outline: none;
-    border-color: #4b779e;
-  }
-
-  button[type="submit"] {
-    background: var(--gold-gradient);
-    color: #f7fbff;
-    border: none;
-    padding: 0.95rem 1.5rem;
-    border-radius: 10px;
-    font-family: var(--font-body);
-    font-weight: 500;
-    font-size: 1rem;
-    cursor: pointer;
-    box-shadow: 0 6px 18px rgba(63, 104, 143, 0.28);
-    transition: all 0.3s ease;
-  }
-  button[type="submit"]:hover:not(:disabled) {
-    background: var(--gold-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 22px rgba(63, 104, 143, 0.38);
-  }
-  button[type="submit"]:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
+  .contact-tile a:hover {
+    text-decoration: underline;
   }
 
   /* ==========================================================
-     10) ปุ่มเล่นเพลง
+     SOUND BUTTON & FLOATING DOCK
   ========================================================== */
   .sound-btn {
     position: fixed;
-    top: 1.25rem;
-    right: 1.25rem;
+    top: 1.2rem;
+    right: 1.2rem;
     width: 46px;
     height: 46px;
     border-radius: 50%;
-    background: linear-gradient(145deg, #ffffff 0%, #d5e6f5 100%);
-    border: 1px solid var(--border-soft);
-    color: var(--cream);
+    background: var(--glass-strong);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    color: var(--ink-main);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     z-index: 50;
-    font-size: 1.2rem;
-    box-shadow: 0 6px 20px rgba(34, 59, 82, 0.14);
-    transition: transform 0.2s ease, background 0.3s ease;
+    font-size: 1.15rem;
+    box-shadow: 0 8px 22px rgba(33, 66, 97, 0.14);
+    transition: transform 0.2s ease;
   }
 
-  .sound-btn:hover {
-    transform: scale(1.08);
-  }
+  .sound-btn:hover { transform: scale(1.07); }
 
   @keyframes spinRecord {
     from { transform: rotate(0deg); }
@@ -712,51 +828,47 @@
   }
 
   .sound-btn.playing {
-    animation: spinRecord 3s linear infinite;
+    animation: spinRecord 3.2s linear infinite;
   }
 
-  /* ==========================================================
-     11) BOTTOM NAVIGATION BAR
-  ========================================================== */
   .bottom-nav {
     position: fixed;
     bottom: 1rem;
     left: 50%;
     transform: translateX(-50%);
     width: calc(100% - 1.5rem);
-    max-width: 420px;
-    background: linear-gradient(135deg, rgba(244, 250, 255, 0.92) 0%, rgba(214, 232, 248, 0.95) 100%);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.8);
-    border-radius: 999px;
+    max-width: 430px;
+    background: rgba(244, 250, 255, 0.86);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    border-radius: 26px;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 0.3rem 0.4rem;
+    padding: 0.35rem 0.45rem;
     z-index: 80;
-    box-shadow: 0 12px 32px rgba(34, 59, 82, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+    box-shadow: 0 14px 34px rgba(27, 52, 76, 0.16);
   }
 
   .bottom-nav a {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.15rem;
-    color: var(--cream);
+    gap: 0.18rem;
+    color: var(--ink-main);
     text-decoration: none;
-    font-size: 0.65rem;
+    font-size: 0.66rem;
     font-weight: 500;
-    padding: 0.3rem 0.4rem;
-    border-radius: 14px;
-    transition: background 0.25s ease, color 0.25s ease;
+    padding: 0.35rem 0.45rem;
+    border-radius: 18px;
     flex: 1;
     text-align: center;
+    transition: background 0.2s ease;
   }
 
-  .bottom-nav a:hover, .bottom-nav a:active {
-    background: rgba(255, 255, 255, 0.68);
-    color: #132536;
+  .bottom-nav a:hover {
+    background: rgba(86, 135, 181, 0.14);
   }
 
   .bottom-nav svg {
@@ -766,37 +878,36 @@
   }
 
   /* ==========================================================
-     12) FOOTER
+     FOOTER
   ========================================================== */
   footer {
     margin-top: auto;
     text-align: center;
-    padding: 2.5rem var(--space-3) 1rem var(--space-3);
-    color: var(--muted);
+    padding: 2.5rem 1.5rem 1rem 1.5rem;
+    color: var(--ink-sub);
+    position: relative;
+    z-index: 2;
   }
 
   footer h2 {
     font-family: 'Amiri', serif;
-    font-size: 1.4rem;
-    color: var(--cream);
+    font-size: 1.45rem;
+    color: var(--ink-main);
     margin-bottom: 0.3rem;
   }
 
   footer .footer-sub {
-    font-family: var(--font-body);
-    font-size: 0.78rem;
-    letter-spacing: 0.05em;
-    opacity: 0.88;
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
   }
 </style>
 </head>
 <body class="intro-active">
 
-<!-- กล่องแสดงดอกไม้ลอยแบคกราว -->
 <div id="flowerContainer"></div>
 
 <!-- ==========================================================
-     หน้าปกซอง (INTRO ENVELOPE)
+     ENVELOPE INTRO
 ========================================================== -->
 <div id="envelopeIntro">
   <div>
@@ -825,71 +936,98 @@
   </div>
 </div>
 
-<!-- ปุ่มเล่น/หยุดเพลง -->
 <button class="sound-btn" id="soundBtn" aria-label="เปิด/ปิดเพลง">♪</button>
 <audio id="bgm" src="wedding-song.mp3" loop></audio>
 
-<!-- ========== 1) ส่วนแสดงรูปภาพการ์ดแต่งงาน (รูปที่ 1 และ รูปที่ 2) ========== -->
+<!-- ========== 1) INVITATION CARDS ========== -->
 <section class="reveal card-preview-section" id="wedding-card-section">
-  <!-- รูปที่ 1 -->
-  <div class="card-img-wrapper">
+  <div class="card-frame">
     <img src="74563.png" alt="การ์ดแต่งงาน Natjawa & Ikhlas รูปที่ 1" id="cardImage1">
   </div>
-
-  <!-- รูปที่ 2 -->
-  <div class="card-img-wrapper">
+  <div class="card-frame">
     <img src="555666.png" alt="การ์ดแต่งงาน Natjawa & Ikhlas รูปที่ 2" id="cardImage2">
   </div>
 </section>
 
-<!-- ========== COUNTDOWN ========== -->
-<section class="reveal">
-  <p style="color:var(--muted); font-family: 'Amiri', serif; font-size: 2rem; line-height: 1.2;">Countdown</p>
-  <div class="divider"></div>
-  <div class="countdown" id="countdown">
-    <div class="box"><strong id="cd-days">00</strong><span>วัน</span></div>
-    <div class="box"><strong id="cd-hours">00</strong><span>ชั่วโมง</span></div>
-    <div class="box"><strong id="cd-mins">00</strong><span>นาที</span></div>
-    <div class="box"><strong id="cd-secs">00</strong><span>วินาที</span></div>
+<!-- ========== 2) RING COUNTDOWN ========== -->
+<section class="reveal" id="countdown-section">
+  <span class="section-kicker">Save The Date</span>
+  <h2 class="section-title">Countdown</h2>
+  <div class="ornament-line"><span class="ornament-diamond"></span></div>
+
+  <div class="ring-countdown" id="countdown">
+    <div class="ring-item">
+      <div class="ring-wrap">
+        <svg viewBox="0 0 68 68">
+          <circle class="ring-track" cx="34" cy="34" r="28"></circle>
+          <circle class="ring-progress" id="ring-days" cx="34" cy="34" r="28"></circle>
+        </svg>
+        <span class="ring-num" id="cd-days">00</span>
+      </div>
+      <span class="ring-label">วัน</span>
+    </div>
+
+    <div class="ring-item">
+      <div class="ring-wrap">
+        <svg viewBox="0 0 68 68">
+          <circle class="ring-track" cx="34" cy="34" r="28"></circle>
+          <circle class="ring-progress" id="ring-hours" cx="34" cy="34" r="28"></circle>
+        </svg>
+        <span class="ring-num" id="cd-hours">00</span>
+      </div>
+      <span class="ring-label">ชั่วโมง</span>
+    </div>
+
+    <div class="ring-item">
+      <div class="ring-wrap">
+        <svg viewBox="0 0 68 68">
+          <circle class="ring-track" cx="34" cy="34" r="28"></circle>
+          <circle class="ring-progress" id="ring-mins" cx="34" cy="34" r="28"></circle>
+        </svg>
+        <span class="ring-num" id="cd-mins">00</span>
+      </div>
+      <span class="ring-label">นาที</span>
+    </div>
+
+    <div class="ring-item">
+      <div class="ring-wrap">
+        <svg viewBox="0 0 68 68">
+          <circle class="ring-track" cx="34" cy="34" r="28"></circle>
+          <circle class="ring-progress" id="ring-secs" cx="34" cy="34" r="28"></circle>
+        </svg>
+        <span class="ring-num" id="cd-secs">00</span>
+      </div>
+      <span class="ring-label">วินาที</span>
+    </div>
   </div>
 </section>
 
-<!-- ========== ดุอาและฮาดิษอวยพร ========== -->
+<!-- ========== 3) DUA & HADITH ARCH SWITCHER ========== -->
 <section class="reveal" id="dua-section">
-  <h2 style="font-size:1.8rem;">ดุอาและฮาดิษอวยพร</h2>
-  <p style="font-size:0.9rem; color:var(--muted); margin-top:0.3rem;">คำอวยพรจากอัลกุรอานและสุนนะฮ์</p>
-  <div class="divider"></div>
+  <span class="section-kicker">Blessings</span>
+  <h2 class="section-title">ดุอาและฮาดิษอวยพร</h2>
+  <div class="ornament-line"><span class="ornament-diamond"></span></div>
 
-  <!-- Card 1 -->
-  <div class="dua-card">
-    <div class="dua-tag">📖 ดุอา</div>
-    <div class="arabic-text">بَارَكَ اللَّهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ</div>
-    <p class="thai-translation">ขออัลลอฮ์ทรงประทานความจำเริญแก่ท่านทั้งสอง และทรงเมตตาแก่ท่านทั้งสอง และทรงรวมท่านทั้งสองไว้ในความดีงาม</p>
+  <div class="dua-tabs" role="tablist" aria-label="เลือกบทดุอาและฮาดิษ">
+    <button type="button" class="dua-tab-btn active" data-dua="0">ดุอาที่ 1</button>
+    <button type="button" class="dua-tab-btn" data-dua="1">ดุอาที่ 2</button>
+    <button type="button" class="dua-tab-btn" data-dua="2">ฮาดิษ</button>
   </div>
 
-  <!-- Card 2 -->
-  <div class="dua-card">
-    <div class="dua-tag">📖 ดุอา</div>
-    <div class="arabic-text">اللَّهُمَّ إِنِّي أَسْأَلُكَ خَيْرَهَا وَخَيْرَ مَا جَبَلْتَهَا عَلَيْهِ، وَأَعُوذُ بِكَ مِنْ شَرِّهَا وَشَرِّ مَا جَبَلْتَهَا عَلَيْهِ</div>
-    <p class="thai-translation">ข้าแต่อัลลอฮ์ แท้จริงฉันขอต่อพระองค์ซึ่งความดีของเธอ และความดีที่พระองค์ทรงกำหนดไว้ในตัวเธอ และฉันขอความคุ้มครองต่อพระองค์ จากความชั่วของเธอ และความชั่วที่พระองค์ทรงกำหนดไว้ในตัวเธอ</p>
-  </div>
-
-  <!-- Card 3 -->
-  <div class="dua-card">
-    <div class="dua-tag">📖 ฮาดิษ</div>
-    <div class="arabic-text">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً</div>
-    <p class="thai-translation">และในบรรดาสัญญาณของพระองค์คือ พระองค์ทรงสร้างคู่ครองจากพวกท่านเอง เพื่อท่านจะได้สงบสุขไปยังคู่ของท่าน และทรงกำหนดระหว่างท่านทั้งสองซึ่งความรักและความเมตตา</p>
+  <div class="arch-dua-card" id="archDuaCard">
+    <span class="arch-badge" id="duaBadge">📖 ดุอา</span>
+    <div class="arabic-text" id="duaArabic">بَارَكَ اللَّهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ</div>
+    <p class="thai-translation" id="duaThai">ขออัลลอฮ์ทรงประทานความจำเริญแก่ท่านทั้งสอง และทรงเมตตาแก่ท่านทั้งสอง และทรงรวมท่านทั้งสองไว้ในความดีงาม</p>
   </div>
 </section>
 
-<!-- ========== เขียนคำอวยพร ========== -->
+<!-- ========== 4) GUESTBOOK & MARQUEE ========== -->
 <section class="reveal" id="wish-section">
-  <h2 style="font-size:1.8rem;">เขียนคำอวยพร</h2>
-  <p style="font-size:0.9rem; color:var(--muted); margin-top:0.3rem;">ร่วมส่งความปรารถนาดีให้แก่ Natjawa &amp; Ikhlas</p>
-  <div class="divider"></div>
+  <span class="section-kicker">Wishes</span>
+  <h2 class="section-title">เขียนคำอวยพร</h2>
+  <div class="ornament-line"><span class="ornament-diamond"></span></div>
 
-  <!-- ฟอร์มสำหรับส่งคำอวยพร -->
-  <div class="wish-form-card">
+  <div class="glass-panel">
     <form id="wishForm">
       <input type="text" id="wishName" placeholder="ชื่อของคุณ" required>
       <textarea id="wishMessage" placeholder="เขียนคำอวยพรของคุณที่นี่..." required></textarea>
@@ -897,72 +1035,90 @@
     </form>
   </div>
 
-  <!-- Marquee แสดงคำอวยพรวิ่งแบบ 3 แถบสไลด์เต็มหน้าจอ -->
-  <div style="margin-top: 2rem;">
-    <h3 style="font-size:1.2rem; color:var(--cream); font-family:var(--font-display); margin-bottom:1rem;">คำอวยพรจากแขกผู้มีเกียรติ</h3>
-    <div class="marquee-fullscreen-group">
-      <div class="marquee-wrap"><div class="marquee-track track-1"></div></div>
-      <div class="marquee-wrap"><div class="marquee-track track-2"></div></div>
-      <div class="marquee-wrap"><div class="marquee-track track-3"></div></div>
-    </div>
+  <h3 class="wishes-board-label">คำอวยพรจากแขกผู้มีเกียรติ</h3>
+  <div class="marquee-fullscreen-group">
+    <div class="marquee-wrap"><div class="marquee-track track-1"></div></div>
+    <div class="marquee-wrap"><div class="marquee-track track-2"></div></div>
+    <div class="marquee-wrap"><div class="marquee-track track-3"></div></div>
   </div>
 </section>
 
-<!-- ========== รายละเอียดงาน & สถานที่ ========== -->
+<!-- ========== 5) EVENT DETAILS ========== -->
 <section class="reveal" id="venue-section">
-  <h2 style="font-size:1.8rem;">รายละเอียดงาน</h2>
-  <div class="divider"></div>
-  <div class="info-card">
-    <div class="info-item"><strong>วันที่:</strong> 9 มกราคม 2570 (ตรงกับวันเสาร์)</div>
-    <div class="info-item"><strong>เวลา:</strong> 10:00 - 18:00 น.</div>
-    <div class="info-item"><strong>สถานที่:</strong> ณ โรงเรียนแสงธรรมวิทยามูลนิธิ (จะนะ)</div>
+  <span class="section-kicker">The Celebration</span>
+  <h2 class="section-title">รายละเอียดงาน</h2>
+  <div class="ornament-line"><span class="ornament-diamond"></span></div>
 
-    <!-- วงกลมสีธีมการแต่งกาย 4 สี -->
-    <div style="margin-top: 1.25rem;">
-      <strong style="color: var(--cream); display: block; margin-bottom: 0.75rem;">ธีมการแต่งกาย:</strong>
-      <div style="display: flex; justify-content: center; align-items: center; gap: 0.75rem;">
-        <span style="width: 38px; height: 38px; border-radius: 50%; background-color: #603314; display: inline-block; box-shadow: 0 3px 8px rgba(0,0,0,0.15); border: 2px solid #ffffff;"></span>
-        <span style="width: 38px; height: 38px; border-radius: 50%; background-color: #758925; display: inline-block; box-shadow: 0 3px 8px rgba(0,0,0,0.15); border: 2px solid #ffffff;"></span>
-        <span style="width: 38px; height: 38px; border-radius: 50%; background-color: #b5c49a; display: inline-block; box-shadow: 0 3px 8px rgba(0,0,0,0.15); border: 2px solid #ffffff;"></span>
-        <span style="width: 38px; height: 38px; border-radius: 50%; background-color: #dfa0aa; display: inline-block; box-shadow: 0 3px 8px rgba(0,0,0,0.15); border: 2px solid #ffffff;"></span>
+  <div class="glass-panel">
+    <div class="timeline-list">
+      <div class="timeline-row">
+        <div class="timeline-icon">📅</div>
+        <div>
+          <span class="timeline-meta">วันที่จัดงาน</span>
+          <span class="timeline-val">9 มกราคม 2570 (ตรงกับวันเสาร์)</span>
+        </div>
+      </div>
+
+      <div class="timeline-row">
+        <div class="timeline-icon">⏰</div>
+        <div>
+          <span class="timeline-meta">เวลา</span>
+          <span class="timeline-val">10:00 - 18:00 น.</span>
+        </div>
+      </div>
+
+      <div class="timeline-row">
+        <div class="timeline-icon">🏛️</div>
+        <div>
+          <span class="timeline-meta">สถานที่</span>
+          <span class="timeline-val">ณ โรงเรียนแสงธรรมวิทยามูลนิธิ (จะนะ)</span>
+        </div>
       </div>
     </div>
 
-    <div style="margin-top: 1.5rem;">
-      <a href="https://maps.app.goo.gl/L5VRE9kdC2bZ9fLs5" target="_blank" rel="noopener" class="map-btn">
-        📍 ดูสถานที่ใน Google Maps
-      </a>
+    <div class="swatch-row" aria-label="ธีมการแต่งกาย">
+      <span style="font-size:0.88rem; font-weight:600; margin-right:0.25rem;">ธีมการแต่งกาย:</span>
+      <span class="swatch-dot" style="background-color:#603314;"></span>
+      <span class="swatch-dot" style="background-color:#758925;"></span>
+      <span class="swatch-dot" style="background-color:#b5c49a;"></span>
+      <span class="swatch-dot" style="background-color:#dfa0aa;"></span>
     </div>
+
+    <a href="https://maps.app.goo.gl/L5VRE9kdC2bZ9fLs5" target="_blank" rel="noopener" class="map-btn">
+      📍 ดูสถานที่ใน Google Maps
+    </a>
   </div>
 </section>
 
-<!-- ========== ช่องทางการติดต่อ ========== -->
+<!-- ========== 6) CONTACTS ========== -->
 <section class="reveal" id="contact-section">
-  <h2 style="font-size:1.8rem;">ช่องทางการติดต่อ</h2>
-  <div class="divider"></div>
-  <div class="contact-card">
+  <span class="section-kicker">Get In Touch</span>
+  <h2 class="section-title">ช่องทางการติดต่อ</h2>
+  <div class="ornament-line"><span class="ornament-diamond"></span></div>
+
+  <div class="glass-panel">
     <div class="contact-grid">
-      <div class="contact-item">
+      <div class="contact-tile">
         <strong>แม่เจ้าบ่าว</strong>
-        <p>โทร: <a href="tel:0836539718">083-6539718</a></p>
+        <a href="tel:0836539718">083-6539718</a>
       </div>
-      <div class="contact-item">
+      <div class="contact-tile">
         <strong>เจ้าบ่าว</strong>
-        <p>โทร: <a href="tel:0928493327">092-8493327</a></p>
+        <a href="tel:0928493327">092-8493327</a>
       </div>
-      <div class="contact-item">
+      <div class="contact-tile">
         <strong>แม่เจ้าสาว</strong>
-        <p>โทร: <a href="tel:0898739628">089-8739628</a></p>
+        <a href="tel:0898739628">089-8739628</a>
       </div>
-      <div class="contact-item">
+      <div class="contact-tile">
         <strong>เจ้าสาว</strong>
-        <p>โทร: <a href="tel:0617527143">061-7527143</a></p>
+        <a href="tel:0617527143">061-7527143</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ========== BOTTOM NAVIGATION BAR ========== -->
+<!-- ========== FLOATING DOCK ========== -->
 <nav class="bottom-nav">
   <a href="#dua-section">
     <svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zm0 13.5L4.27 12 12 7.78 19.73 12 12 16.5z"/></svg>
@@ -988,7 +1144,6 @@
 </footer>
 
 <script>
-  // ปิดไม่ให้เบราว์เซอร์จำตำแหน่ง Scroll เดิมเมื่อรีเฟรช และเลื่อนไปบนสุดเมื่อโหลดหน้า
   if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
   }
@@ -997,7 +1152,7 @@
   });
 
   /* ==========================================================
-     BACKGROUND FLOATING FLOWERS
+     FLOATING FLOWERS
   ========================================================== */
   const flowerContainer = document.getElementById('flowerContainer');
   const FLOWER_IMAGE_SRC = '224466.png';
@@ -1029,7 +1184,7 @@
   setInterval(createFlower, 700);
 
   /* ==========================================================
-     0) ENVELOPE INTRO
+     ENVELOPE INTRO
   ========================================================== */
   const envelope = document.getElementById('envelope');
   const introScreen = document.getElementById('envelopeIntro');
@@ -1061,7 +1216,7 @@
   });
 
   /* ==========================================================
-     A) SCROLL REVEAL
+     SCROLL REVEAL
   ========================================================== */
   const revealEls = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
@@ -1076,16 +1231,33 @@
   revealEls.forEach(el => observer.observe(el));
 
   /* ==========================================================
-     C) COUNTDOWN TIMER (9 มกราคม 2570 = 2027-01-09)
+     RING COUNTDOWN (9 มกราคม 2570 = 2027-01-09)
   ========================================================== */
   const weddingDate = new Date('2027-01-09T10:00:00+07:00').getTime();
+  const radius = 28;
+  const circumference = 2 * Math.PI * radius;
+
+  const ringDays = document.getElementById('ring-days');
+  const ringHours = document.getElementById('ring-hours');
+  const ringMins = document.getElementById('ring-mins');
+  const ringSecs = document.getElementById('ring-secs');
+
+  [ringDays, ringHours, ringMins, ringSecs].forEach(circle => {
+    circle.style.strokeDasharray = circumference;
+    circle.style.strokeDashoffset = circumference;
+  });
+
+  function setRingOffset(circleEl, ratio) {
+    const clamped = Math.max(0, Math.min(1, ratio));
+    circleEl.style.strokeDashoffset = circumference * (1 - clamped);
+  }
 
   function updateCountdown() {
     const now = new Date().getTime();
     const diff = weddingDate - now;
 
     if (diff <= 0) {
-      document.getElementById('countdown').innerHTML = '<p style="color:var(--cream); font-family:var(--font-display); font-size:1.5rem;">ถึงวันแต่งงานแล้ว! 🎉</p>';
+      document.getElementById('countdown').innerHTML = '<p style="grid-column: 1 / -1; color:var(--ink-main); font-family:var(--font-display); font-size:1.5rem;">ถึงวันแต่งงานแล้ว! 🎉</p>';
       clearInterval(timer);
       return;
     }
@@ -1099,13 +1271,61 @@
     document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
     document.getElementById('cd-mins').textContent = String(mins).padStart(2, '0');
     document.getElementById('cd-secs').textContent = String(secs).padStart(2, '0');
+
+    setRingOffset(ringDays, Math.min(days / 60, 1));
+    setRingOffset(ringHours, hours / 24);
+    setRingOffset(ringMins, mins / 60);
+    setRingOffset(ringSecs, secs / 60);
   }
 
   updateCountdown();
   const timer = setInterval(updateCountdown, 1000);
 
   /* ==========================================================
-     D) MARQUEE 3 ROWS (RANDOM DISTRIBUTION & NO DUPLICATE)
+     INTERACTIVE DUA / HADITH SWITCHER
+  ========================================================== */
+  const duaItems = [
+    {
+      badge: '📖 ดุอา',
+      arabic: 'بَارَكَ اللَّهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ',
+      thai: 'ขออัลลอฮ์ทรงประทานความจำเริญแก่ท่านทั้งสอง และทรงเมตตาแก่ท่านทั้งสอง และทรงรวมท่านทั้งสองไว้ในความดีงาม'
+    },
+    {
+      badge: '📖 ดุอา',
+      arabic: 'اللَّهُمَّ إِنِّي أَسْأَلُكَ خَيْرَهَا وَخَيْرَ مَا جَبَلْتَهَا عَلَيْهِ، وَأَعُوذُ بِكَ مِنْ شَرِّهَا وَشَرِّ مَا جَبَلْتَهَا عَلَيْهِ',
+      thai: 'ข้าแต่อัลลอฮ์ แท้จริงฉันขอต่อพระองค์ซึ่งความดีของเธอ และความดีที่พระองค์ทรงกำหนดไว้ในตัวเธอ และฉันขอความคุ้มครองต่อพระองค์ จากความชั่วของเธอ และความชั่วที่พระองค์ทรงกำหนดไว้ในตัวเธอ'
+    },
+    {
+      badge: '📖 ฮาดิษ',
+      arabic: 'وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً',
+      thai: 'และในบรรดาสัญญาณของพระองค์คือ พระองค์ทรงสร้างคู่ครองจากพวกท่านเอง เพื่อท่านจะได้สงบสุขไปยังคู่ของท่าน และทรงกำหนดระหว่างท่านทั้งสองซึ่งความรักและความเมตตา'
+    }
+  ];
+
+  const duaButtons = document.querySelectorAll('.dua-tab-btn');
+  const archCard = document.getElementById('archDuaCard');
+  const duaBadge = document.getElementById('duaBadge');
+  const duaArabic = document.getElementById('duaArabic');
+  const duaThai = document.getElementById('duaThai');
+
+  duaButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const idx = Number(btn.dataset.dua);
+      duaButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      archCard.classList.add('switching');
+      setTimeout(() => {
+        duaBadge.textContent = duaItems[idx].badge;
+        duaArabic.textContent = duaItems[idx].arabic;
+        duaThai.textContent = duaItems[idx].thai;
+        archCard.classList.remove('switching');
+      }, 150);
+    });
+  });
+
+  /* ==========================================================
+     MARQUEE 3 ROWS
   ========================================================== */
   const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwTlqRewP52vFEwgBThJOnQaro8UYK2yNmdJI7OinN9RCSd55o1QKrQQ76Q5zWY6Yg/exec";
 
@@ -1192,7 +1412,7 @@
   });
 
   /* ==========================================================
-     E) ปุ่มเล่น/หยุดเพลง
+     SOUND BUTTON
   ========================================================== */
   soundBtn.addEventListener('click', (e) => {
     e.stopPropagation();
