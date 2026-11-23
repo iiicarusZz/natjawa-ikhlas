@@ -1,3 +1,11 @@
 git add .
 git commit -m "update"
 git push
+    <div class="swatch-row" aria-label="ธีมการแต่งกาย">
+      <span style="font-size:0.88rem; font-weight:600; margin-right:0.25rem;">ธีมการแต่งกาย:</span>
+      <span class="swatch-dot" style="background-color:#D69A8E;"></span>
+      <span class="swatch-dot" style="background-color:#EBBFC4;"></span>
+      <span class="swatch-dot" style="background-color:#F2E2C9;"></span>
+      <span class="swatch-dot" style="background-color:#EAE7E2;"></span>
+      <span class="swatch-dot" style="background-color:#DFE4EE;"></span>
+    </div>

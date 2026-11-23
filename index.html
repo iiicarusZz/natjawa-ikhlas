@@ -53,6 +53,10 @@
     min-height: 100vh;
   }
 
+  body.modal-open {
+    overflow: hidden;
+  }
+
   h1, h2, h3 {
     font-family: var(--font-display);
     font-weight: 500;
@@ -620,11 +624,45 @@
     cursor: not-allowed;
   }
 
+  .wishes-header-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin: 2.2rem 0 0.9rem 0;
+    flex-wrap: wrap;
+  }
+
   .wishes-board-label {
     font-family: var(--font-display);
     font-size: 1.25rem;
     color: var(--ink-main);
-    margin: 2.2rem 0 0.85rem 0;
+    margin: 0;
+  }
+
+  .view-all-wishes-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(74, 122, 166, 0.32);
+    color: var(--ink-main);
+    padding: 0.42rem 0.95rem;
+    border-radius: 999px;
+    font-family: var(--font-body);
+    font-size: 0.84rem;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(33, 66, 97, 0.08);
+    transition: all 0.22s ease;
+  }
+
+  .view-all-wishes-btn:hover {
+    background: var(--btn-grad);
+    color: #ffffff;
+    border-color: transparent;
+    transform: translateY(-1px);
   }
 
   .marquee-fullscreen-group {
@@ -680,6 +718,146 @@
     color: var(--ink-main);
     font-weight: 500;
     box-shadow: 0 3px 10px rgba(33, 66, 97, 0.06);
+  }
+
+  /* ==========================================================
+     FULL PAGE VIEW: ALL WISHES
+  ========================================================== */
+  .all-wishes-page {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: var(--sky-bg);
+    overflow-y: auto;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(18px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+    padding-bottom: 4rem;
+  }
+
+  .all-wishes-page.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .all-wishes-topbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.9rem 1.25rem;
+    background: rgba(244, 250, 255, 0.86);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.85);
+    box-shadow: 0 6px 20px rgba(27, 52, 76, 0.08);
+  }
+
+  .back-home-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--btn-grad);
+    color: #ffffff;
+    border: none;
+    padding: 0.52rem 1rem;
+    border-radius: 999px;
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(56, 98, 138, 0.25);
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+
+  .back-home-btn:hover {
+    background: var(--btn-hover);
+    transform: translateX(-2px);
+  }
+
+  .all-wishes-page-title {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    color: var(--ink-main);
+    font-weight: 600;
+  }
+
+  .close-wishes-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid var(--line-blue);
+    background: rgba(255, 255, 255, 0.85);
+    color: var(--ink-main);
+    font-size: 1.1rem;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .close-wishes-btn:hover {
+    background: #ffffff;
+    transform: scale(1.06);
+  }
+
+  .all-wishes-container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 1.75rem 1.25rem 2rem 1.25rem;
+  }
+
+  .all-wishes-count {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--ink-sub);
+    margin-bottom: 1.25rem;
+  }
+
+  .all-wishes-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .wish-entry-card {
+    background: var(--glass-strong);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 1.1rem 1.25rem;
+    text-align: left;
+    box-shadow: 0 8px 24px rgba(33, 66, 97, 0.08);
+  }
+
+  .wish-entry-msg {
+    margin: 0 0 0.5rem 0;
+    font-size: 0.98rem;
+    color: var(--ink-main);
+    line-height: 1.65;
+    white-space: pre-line;
+  }
+
+  .wish-entry-author {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--ink-sub);
+    text-align: right;
+  }
+
+  .empty-wishes-box {
+    background: var(--glass-strong);
+    border: 1px solid var(--glass-border);
+    border-radius: 22px;
+    padding: 2.2rem 1.25rem;
+    text-align: center;
+    color: var(--ink-sub);
   }
 
   /* ==========================================================
@@ -1035,7 +1213,15 @@
     </form>
   </div>
 
-  <h3 class="wishes-board-label">คำอวยพรจากแขกผู้มีเกียรติ</h3>
+  <div class="wishes-header-bar">
+    <h3 class="wishes-board-label">คำอวยพรจากแขกผู้มีเกียรติ</h3>
+    <button type="button" class="view-all-wishes-btn" id="openWishesPageBtn">
+      <span>ดูคำอวยพรทั้งหมด</span>
+      <strong id="wishCountBadge">(0)</strong>
+      <span>→</span>
+    </button>
+  </div>
+
   <div class="marquee-fullscreen-group">
     <div class="marquee-wrap"><div class="marquee-track track-1"></div></div>
     <div class="marquee-wrap"><div class="marquee-track track-2"></div></div>
@@ -1078,10 +1264,11 @@
 
     <div class="swatch-row" aria-label="ธีมการแต่งกาย">
       <span style="font-size:0.88rem; font-weight:600; margin-right:0.25rem;">ธีมการแต่งกาย:</span>
-      <span class="swatch-dot" style="background-color:#603314;"></span>
-      <span class="swatch-dot" style="background-color:#758925;"></span>
-      <span class="swatch-dot" style="background-color:#b5c49a;"></span>
-      <span class="swatch-dot" style="background-color:#dfa0aa;"></span>
+      <span class="swatch-dot" style="background-color:#D69A8E;"></span>
+      <span class="swatch-dot" style="background-color:#EBBFC4;"></span>
+      <span class="swatch-dot" style="background-color:#F2E2C9;"></span>
+      <span class="swatch-dot" style="background-color:#EAE7E2;"></span>
+      <span class="swatch-dot" style="background-color:#DFE4EE;"></span>
     </div>
 
     <a href="https://maps.app.goo.gl/L5VRE9kdC2bZ9fLs5" target="_blank" rel="noopener" class="map-btn">
@@ -1118,6 +1305,23 @@
   </div>
 </section>
 
+<!-- ========== ALL WISHES FULL PAGE ========== -->
+<div class="all-wishes-page" id="allWishesPage" role="dialog" aria-modal="true" aria-labelledby="allWishesTitle">
+  <div class="all-wishes-topbar">
+    <button type="button" class="back-home-btn" id="backFromWishesBtn">
+      <span>←</span>
+      <span>กลับหน้าหลัก</span>
+    </button>
+    <span class="all-wishes-page-title" id="allWishesTitle">คำอวยพรทั้งหมด</span>
+    <button type="button" class="close-wishes-btn" id="closeWishesPageBtn" aria-label="ปิดหน้าคำอวยพรทั้งหมด">✕</button>
+  </div>
+
+  <div class="all-wishes-container">
+    <p class="all-wishes-count" id="allWishesSummary">กำลังโหลดคำอวยพร...</p>
+    <div class="all-wishes-grid" id="allWishesList"></div>
+  </div>
+</div>
+
 <!-- ========== FLOATING DOCK ========== -->
 <nav class="bottom-nav">
   <a href="#dua-section">
@@ -1139,7 +1343,7 @@
 </nav>
 
 <footer>
-  <h2>بَارَكَ اللَّهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا</h2>
+  <h2>بَارَكَ اللَّهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ</h2>
   <div class="footer-sub">Natjawa &amp; Ikhlas · 09.01.2027 (9 มกราคม 2570)</div>
 </footer>
 
@@ -1155,7 +1359,7 @@
      FLOATING FLOWERS
   ========================================================== */
   const flowerContainer = document.getElementById('flowerContainer');
-  const FLOWER_IMAGE_SRC = '224466.png';
+  const FLOWER_IMAGE_SRC = '114477.png';
 
   function createFlower() {
     if (!flowerContainer) return;
@@ -1325,12 +1529,62 @@
   });
 
   /* ==========================================================
-     MARQUEE 3 ROWS
+     MARQUEE & FULL WISHES PAGE
   ========================================================== */
   const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwTlqRewP52vFEwgBThJOnQaro8UYK2yNmdJI7OinN9RCSd55o1QKrQQ76Q5zWY6Yg/exec";
 
   const tracks = document.querySelectorAll('.marquee-track');
   const displayedWishes = new Set();
+  const allWishesStore = [];
+
+  const wishCountBadge = document.getElementById('wishCountBadge');
+  const allWishesPage = document.getElementById('allWishesPage');
+  const openWishesPageBtn = document.getElementById('openWishesPageBtn');
+  const backFromWishesBtn = document.getElementById('backFromWishesBtn');
+  const closeWishesPageBtn = document.getElementById('closeWishesPageBtn');
+  const allWishesList = document.getElementById('allWishesList');
+  const allWishesSummary = document.getElementById('allWishesSummary');
+
+  let savedMainScrollY = 0;
+
+  function renderAllWishesList() {
+    const total = allWishesStore.length;
+    if (wishCountBadge) {
+      wishCountBadge.textContent = `(${total})`;
+    }
+    if (!allWishesList || !allWishesSummary) return;
+
+    allWishesSummary.textContent = total > 0
+      ? `คำอวยพรทั้งหมด ${total} ข้อความ`
+      : 'ยังไม่มีคำอวยพรในขณะนี้';
+
+    allWishesList.innerHTML = '';
+
+    if (total === 0) {
+      const emptyBox = document.createElement('div');
+      emptyBox.className = 'empty-wishes-box';
+      emptyBox.textContent = 'ร่วมส่งคำอวยพรแรกให้แก่ Natjawa & Ikhlas ได้ที่หน้าหลักครับ 🤍';
+      allWishesList.appendChild(emptyBox);
+      return;
+    }
+
+    allWishesStore.forEach(item => {
+      const card = document.createElement('article');
+      card.className = 'wish-entry-card';
+
+      const msgEl = document.createElement('p');
+      msgEl.className = 'wish-entry-msg';
+      msgEl.textContent = item.message;
+
+      const authorEl = document.createElement('span');
+      authorEl.className = 'wish-entry-author';
+      authorEl.textContent = `— ${item.name}`;
+
+      card.appendChild(msgEl);
+      card.appendChild(authorEl);
+      allWishesList.appendChild(card);
+    });
+  }
 
   function addWishToRandomTrack(name, msg) {
     if (!tracks.length) return;
@@ -1342,6 +1596,41 @@
     tracks[randomIndex].appendChild(wishEl);
   }
 
+  function registerWish(name, msg) {
+    const wishKey = `${name}-${msg}`;
+    if (displayedWishes.has(wishKey)) return false;
+
+    displayedWishes.add(wishKey);
+    allWishesStore.push({ name, message: msg });
+    addWishToRandomTrack(name, msg);
+    renderAllWishesList();
+    return true;
+  }
+
+  function openAllWishesPage() {
+    savedMainScrollY = window.scrollY;
+    renderAllWishesList();
+    allWishesPage.classList.add('open');
+    allWishesPage.scrollTop = 0;
+    document.body.classList.add('modal-open');
+  }
+
+  function closeAllWishesPage() {
+    allWishesPage.classList.remove('open');
+    document.body.classList.remove('modal-open');
+    window.scrollTo({ top: savedMainScrollY, behavior: 'instant' });
+  }
+
+  openWishesPageBtn.addEventListener('click', openAllWishesPage);
+  backFromWishesBtn.addEventListener('click', closeAllWishesPage);
+  closeWishesPageBtn.addEventListener('click', closeAllWishesPage);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && allWishesPage.classList.contains('open')) {
+      closeAllWishesPage();
+    }
+  });
+
   async function fetchAndSyncWishes() {
     if (!GOOGLE_SCRIPT_URL) return;
     try {
@@ -1350,10 +1639,8 @@
 
       if (wishes && wishes.length > 0) {
         wishes.forEach(item => {
-          const wishKey = `${item.name}-${item.message}`;
-          if (!displayedWishes.has(wishKey)) {
-            displayedWishes.add(wishKey);
-            addWishToRandomTrack(item.name, item.message);
+          if (item && item.name && item.message) {
+            registerWish(String(item.name).trim(), String(item.message).trim());
           }
         });
       }
@@ -1362,6 +1649,7 @@
     }
   }
 
+  renderAllWishesList();
   fetchAndSyncWishes();
   setInterval(fetchAndSyncWishes, 3000);
 
@@ -1382,8 +1670,6 @@
     submitBtn.textContent = 'กำลังส่งคำอวยพร...';
     submitBtn.disabled = true;
 
-    const wishKey = `${name}-${msg}`;
-
     if (GOOGLE_SCRIPT_URL) {
       try {
         await fetch(GOOGLE_SCRIPT_URL, {
@@ -1397,10 +1683,7 @@
       }
     }
 
-    if (!displayedWishes.has(wishKey)) {
-      displayedWishes.add(wishKey);
-      addWishToRandomTrack(name, msg);
-    }
+    registerWish(name, msg);
 
     submitBtn.textContent = 'ขอบคุณสำหรับคำอวยพรครับ 🤍';
     wishForm.reset();
