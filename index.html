@@ -370,44 +370,55 @@
      1) INVITATION GALLERY SHOWCASE
   ========================================================== */
   .card-preview-section {
-    padding-top: 3rem;
-    padding-bottom: 1.5rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    max-width: 960px;
+    padding-top: var(--space-4);
+    padding-bottom: var(--space-2);
+    padding-left: 0;
+    padding-right: 0;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  .card-frame {
-    background: var(--glass-surface);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid var(--glass-border);
-    border-radius: 26px;
-    padding: 0.75rem;
-    box-shadow: 0 18px 40px rgba(33, 66, 97, 0.1);
-  }
-
-  .card-frame img {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 20px;
+    gap: 0;
   }
 
   @media (min-width: 768px) {
     #cardImage1 {
-      max-width: 920px;
+      max-width: 1000px;
       margin: 0 auto;
     }
+
     #cardImage2 {
-      max-width: 500px;
+      max-width: 520px;
       margin: 0 auto;
     }
   }
 
+  .card-img-wrapper {
+    position: relative;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    overflow: visible;
+  }
+
+  .card-img-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+    image-rendering: -webkit-optimize-contrast;
+    transform: translateZ(0);
+    filter: drop-shadow(0 10px 25px rgba(55, 41, 17, 0.08));
+  }
+
+  .divider {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, #7290a3 50%, transparent 100%);
+    margin: var(--space-3) auto;
+    opacity: 0.85;
+  }
   /* ==========================================================
      2) RING COUNTDOWN UI
   ========================================================== */
