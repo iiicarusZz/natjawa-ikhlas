@@ -1333,7 +1333,7 @@
 
 <!-- ปุ่มเปิด/ปิดเพลงพื้นหลังและไฟล์เสียง -->
 <button class="sound-btn" id="soundBtn" aria-label="เปิด/ปิดเพลง">♪</button>
-<audio id="bgm" src="wedding-song.mp3" loop></audio>
+<audio id="bgm" src="vidssave.com Wedding Nasheed (Music Free) ᴴᴰ _ Eng Subs _ Muhamad Al Muqit 128KBPS.mp3" loop></audio>
 
 <!-- ==========================================================
      1) ส่วนแสดงรูปภาพการ์ดแต่งงาน (จัดกึ่งกลางหน้าจอ)
@@ -1642,14 +1642,54 @@
 
   setInterval(createFlower, 700);
 
-  /* ==========================================================
-     2) ระบบเปิดซองจดหมายและเริ่มเล่นเพลง (Envelope Intro)
+/* ==========================================================
+     2) ระบบเปิดซองจดหมายและเริ่มเล่นเพลงที่วินาทีที่ 9 (Envelope Intro)
   ========================================================== */
   const envelope = document.getElementById('envelope');
   const introScreen = document.getElementById('envelopeIntro');
   const bgm = document.getElementById('bgm');
   const soundBtn = document.getElementById('soundBtn');
+  const START_AT_SECONDS = 8;
   let isPlaying = false;
+
+  // ฟังก์ชันตั้งจุดเริ่มเล่นเพลงและสั่งเล่น
+  function playMusicFromStartTime() {
+    const musicSrc = bgm.getAttribute('src');
+    if (!musicSrc || musicSrc.trim() === '') {
+      alert('ยังไม่ได้ใส่ไฟล์เพลง');
+      return Promise.reject(new Error('No music src'));
+    }
+
+    const applyTimeAndPlay = () => {
+      try {
+        bgm.currentTime = START_AT_SECONDS;
+      } catch (e) {
+        // กรณีไฟล์ยังไม่พร้อม seek ให้รอ loadedmetadata
+      }
+      bgm.volume = 0.1;
+      bgm.playbackRate = 0.87;
+
+      return bgm.play().then(() => {
+        // ย้ำ currentTime อีกครั้งหลัง play() ในกรณีบางเบราว์เซอร์รีเซ็ตจุดเริ่ม
+        if (Math.abs(bgm.currentTime - START_AT_SECONDS) > 0.5 && bgm.duration > START_AT_SECONDS) {
+          bgm.currentTime = START_AT_SECONDS;
+        }
+        isPlaying = true;
+        soundBtn.textContent = '❚❚';
+        soundBtn.classList.add('playing');
+      });
+    };
+
+    if (bgm.readyState >= 1) {
+      return applyTimeAndPlay();
+    }
+
+    return new Promise((resolve, reject) => {
+      bgm.addEventListener('loadedmetadata', () => {
+        applyTimeAndPlay().then(resolve).catch(reject);
+      }, { once: true });
+    });
+  }
 
   introScreen.addEventListener('click', () => {
     if (envelope.classList.contains('opened')) return;
@@ -1657,13 +1697,7 @@
     envelope.classList.add('opened');
     window.scrollTo({ top: 0, behavior: 'instant' });
 
-    bgm.volume = 0.1;
-    bgm.playbackRate = 0.87;
-    bgm.play().then(() => {
-      isPlaying = true;
-      soundBtn.textContent = '❚❚';
-      soundBtn.classList.add('playing');
-    }).catch(error => {
+    playMusicFromStartTime().catch(error => {
       console.log("Autoplay blocked:", error);
     });
 
@@ -1971,7 +2005,7 @@
   });
 
   /* ==========================================================
-     7) ปุ่มเล่นและหยุดเพลงพื้นหลัง (Sound Toggle Button)
+     7) ปุ่มเล่นและหยุดเพลงพื้นหลัง (เริ่มเล่นที่วินาทีที่ 9 เมื่อกดเล่น)
   ========================================================== */
   soundBtn.addEventListener('click', (e) => {
     e.stopPropagation();
@@ -1987,11 +2021,7 @@
       soundBtn.classList.remove('playing');
       isPlaying = false;
     } else {
-      bgm.play().then(() => {
-        soundBtn.textContent = '❚❚';
-        soundBtn.classList.add('playing');
-        isPlaying = true;
-      }).catch(err => {
+      playMusicFromStartTime().catch(err => {
         console.log("Play failed:", err);
       });
     }
