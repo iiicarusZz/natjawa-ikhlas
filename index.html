@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Wedding Invitation — Natjawa &amp; Ikhlas</title>
 
-<!-- Fonts -->
+<!-- โหลดฟอนต์ภาษาอังกฤษ ภาษาไทย และภาษาอาหรับ -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+Thai:wght@400;500;600&family=Sarabun:wght@300;400;500;600&family=Amiri:wght@400;700&family=Alex+Brush&display=swap" rel="stylesheet">
 
 <style>
   /* ==========================================================
-     1) UI VARIABLES — FROSTED SKY & EDITORIAL SERIF
+     1) ตัวแปรสีและธีมหลัก (โทนฟ้าเย็นละมุน + ฟอนต์)
   ========================================================== */
   :root {
     --sky-bg:
@@ -30,15 +30,18 @@
     --font-body: 'Sarabun', sans-serif;
   }
 
+  /* การเลื่อนหน้าจอแบบนุ่มนวล */
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 0;
   }
 
+  /* บังคับคำนวณขนาดกล่องรวมขอบและ padding ให้ถูกต้องทุกองค์ประกอบ */
   *, *::before, *::after {
     box-sizing: border-box;
   }
 
+  /* โครงสร้างหน้าเว็บหลักและพื้นหลังไล่เฉดฟ้าเย็น */
   body {
     margin: 0;
     background: var(--sky-bg);
@@ -53,19 +56,23 @@
     min-height: 100vh;
   }
 
+  /* ล็อกการเลื่อนหน้าหลังเมื่อเปิดหน้าคำอวยพรทั้งหมด */
   body.modal-open {
     overflow: hidden;
   }
 
+  /* หัวข้อหลักและหัวข้อย่อย */
   h1, h2, h3 {
     font-family: var(--font-display);
     font-weight: 500;
     margin: 0;
   }
 
+  /* โครงสร้างแต่ละส่วน (Section) จัดกึ่งกลางหน้าจอ */
   section {
     max-width: 620px;
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
     padding: 3.5rem 1.5rem;
     text-align: center;
     width: 100%;
@@ -73,6 +80,7 @@
     z-index: 2;
   }
 
+  /* ข้อความตัวเอียงนำหน้าหัวข้อแต่ละส่วน */
   .section-kicker {
     font-family: var(--font-display);
     font-style: italic;
@@ -83,12 +91,14 @@
     margin-bottom: 0.25rem;
   }
 
+  /* ชื่อหัวข้อแต่ละส่วน */
   .section-title {
     font-size: clamp(1.85rem, 5vw, 2.35rem);
     color: var(--ink-main);
     letter-spacing: 0.02em;
   }
 
+  /* เส้นคั่นตกแต่งพร้อมเพชรตรงกลาง */
   .ornament-line {
     display: flex;
     align-items: center;
@@ -115,7 +125,7 @@
   }
 
   /* ==========================================================
-     FLOATING FLOWERS
+     2) เอฟเฟกต์ดอกไม้ลอยพื้นหลัง
   ========================================================== */
   #flowerContainer {
     position: fixed;
@@ -147,7 +157,7 @@
   }
 
   /* ==========================================================
-     ENVELOPE INTRO
+     3) หน้าปกซองจดหมายเปิดคำเชิญ (Envelope Intro)
   ========================================================== */
   body.intro-active { overflow: hidden; }
 
@@ -210,6 +220,7 @@
     50% { opacity: 1; transform: scale(1); }
   }
 
+  /* โครงสร้างซองจดหมาย 3 มิติ */
   .envelope-wrapper {
     width: 280px;
     height: 190px;
@@ -236,6 +247,7 @@
     z-index: 1;
   }
 
+  /* การ์ดด้านในซองที่เลื่อนขึ้นมาตอนเปิด */
   .envelope-card {
     position: absolute;
     bottom: 8px;
@@ -269,6 +281,7 @@
     text-transform: uppercase;
   }
 
+  /* ฝาซองซ้าย ขวา ล่าง บน และตราประทับ */
   .envelope-flap-left {
     position: absolute;
     top: 0; left: 0; bottom: 0;
@@ -339,6 +352,7 @@
     transition: opacity 0.4s ease, transform 0.4s ease;
   }
 
+  /* สถานะเมื่อซองถูกเปิด */
   .envelope.opened .envelope-flap-top {
     transform: rotateX(180deg);
     z-index: 1;
@@ -354,7 +368,7 @@
   }
 
   /* ==========================================================
-     REVEAL ANIMATION
+     4) เอฟเฟกต์ค่อยๆ แสดงผลเมื่อเลื่อนหน้าจอ (Scroll Reveal)
   ========================================================== */
   .reveal {
     opacity: 0;
@@ -366,8 +380,8 @@
     transform: translateY(0);
   }
 
-/* ==========================================================
-     1) INVITATION GALLERY SHOWCASE (ปรับสัดส่วน 2 รูปให้แมทช์กัน)
+  /* ==========================================================
+     5) ส่วนแสดงรูปภาพการ์ดแต่งงาน (จัดกึ่งกลางและปรับสเกล 2 รูปให้สมดุล)
   ========================================================== */
   .card-preview-section {
     padding-top: 2rem;
@@ -375,23 +389,28 @@
     padding-left: 1rem;
     padding-right: 1rem;
     width: 100%;
-    max-width: 760px;
-    margin: 0 auto;
+    max-width: 820px;
+    margin-left: auto;
+    margin-right: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: 1.5rem;
   }
 
   .card-img-wrapper {
     position: relative;
     width: 100%;
+    margin-left: auto;
+    margin-right: auto;
     background: transparent;
     border: none;
     box-shadow: none;
     border-radius: 0;
     overflow: visible;
     display: flex;
+    align-items: center;
     justify-content: center;
   }
 
@@ -399,22 +418,27 @@
     width: 100%;
     height: auto;
     display: block;
+    margin-left: auto;
+    margin-right: auto;
     image-rendering: -webkit-optimize-contrast;
     transform: translateZ(0);
     filter: drop-shadow(0 10px 25px rgba(27, 52, 76, 0.1));
   }
 
-  /* จำกัดความกว้างของแต่ละรูปให้สัดส่วนสมดุลกันทั้งมือถือและคอม */
+  /* ขนาดรูปการ์ดบนหน้าจอมือถือและจอทั่วไป */
   #cardImage1 {
-    max-width: 540px;
+    width: 100%;
+    max-width: 520px;
     margin: 0 auto;
   }
 
   #cardImage2 {
-    max-width: 540px;
+    width: 100%;
+    max-width: 520px;
     margin: 0 auto;
   }
 
+  /* ขนาดรูปการ์ดบนหน้าจอแท็บเล็ตและคอมพิวเตอร์ */
   @media (min-width: 768px) {
     .card-preview-section {
       max-width: 920px;
@@ -430,6 +454,7 @@
     }
   }
 
+  /* เส้นคั่นบาง */
   .divider {
     width: 60px;
     height: 2px;
@@ -437,8 +462,9 @@
     margin: 1.75rem auto;
     opacity: 0.85;
   }
+
   /* ==========================================================
-     2) RING COUNTDOWN UI
+     6) ตัวนับถอยหลังแบบวงแหวน (Ring Countdown)
   ========================================================== */
   .ring-countdown {
     display: grid;
@@ -506,7 +532,7 @@
   }
 
   /* ==========================================================
-     3) ARCH DUA CARD & INTERACTIVE TABS
+     7) ส่วนดุอาและฮาดิษอวยพร (ปุ่มสลับบท + การ์ดหัวโค้ง)
   ========================================================== */
   .dua-tabs {
     display: inline-flex;
@@ -587,7 +613,7 @@
   }
 
   /* ==========================================================
-     4) GUESTBOOK FORM & FLOATING PILL MARQUEE
+     8) ฟอร์มเขียนคำอวยพรและแถบคำอวยพรวิ่ง (Guestbook & Marquee)
   ========================================================== */
   .glass-panel {
     background: var(--glass-strong);
@@ -653,6 +679,7 @@
     cursor: not-allowed;
   }
 
+  /* แถบหัวข้อคำอวยพรและปุ่มเปิดดูทั้งหมด */
   .wishes-header-bar {
     display: flex;
     align-items: center;
@@ -694,6 +721,7 @@
     transform: translateY(-1px);
   }
 
+  /* รางข้อความคำอวยพรวิ่ง 3 แถวเต็มความกว้างจอ */
   .marquee-fullscreen-group {
     display: flex;
     flex-direction: column;
@@ -750,7 +778,7 @@
   }
 
   /* ==========================================================
-     FULL PAGE VIEW: ALL WISHES
+     9) หน้าแสดงคำอวยพรทั้งหมดแบบเต็มจอ (Full Page All Wishes)
   ========================================================== */
   .all-wishes-page {
     position: fixed;
@@ -771,6 +799,7 @@
     transform: translateY(0);
   }
 
+  /* แถบด้านบนของหน้ารวมคำอวยพร */
   .all-wishes-topbar {
     position: sticky;
     top: 0;
@@ -834,6 +863,7 @@
     transform: scale(1.06);
   }
 
+  /* รายการการ์ดคำอวยพรทั้งหมด */
   .all-wishes-container {
     max-width: 680px;
     margin: 0 auto;
@@ -890,7 +920,7 @@
   }
 
   /* ==========================================================
-     5) EVENT TIMELINE & CONTACTS
+     10) รายละเอียดงาน ธีมสี และปุ่มแผนที่ (Event Details)
   ========================================================== */
   .timeline-list {
     display: flex;
@@ -933,6 +963,7 @@
     font-weight: 600;
   }
 
+  /* แถบวงกลมสีธีมการแต่งกาย */
   .swatch-row {
     display: flex;
     justify-content: center;
@@ -946,6 +977,8 @@
   .swatch-dot {
     width: 36px;
     height: 36px;
+    flex: 0 0 36px;
+    aspect-ratio: 1 / 1;
     border-radius: 50%;
     border: 2.5px solid #ffffff;
     box-shadow: 0 4px 10px rgba(27, 52, 76, 0.16);
@@ -971,8 +1004,8 @@
     transform: translateY(-2px);
   }
 
-/* ==========================================================
-     CONTACTS (เรียงลงมาแนวดิ่ง + กล่องกระชับไม่กว้างเต็มจอ)
+  /* ==========================================================
+     11) ช่องทางการติดต่อ (Contacts - เรียงแนวดิ่งและกล่องกระชับ)
   ========================================================== */
   .contact-box {
     max-width: 390px;
@@ -1017,7 +1050,7 @@
   }
 
   /* ==========================================================
-     SOUND BUTTON & FLOATING DOCK
+     12) ปุ่มเปิด/ปิดเพลง และแถบเมนูด้านล่าง (Sound & Floating Dock)
   ========================================================== */
   .sound-btn {
     position: fixed;
@@ -1096,8 +1129,9 @@
     height: 16px;
     fill: currentColor;
   }
+
   /* ==========================================================
-     MOBILE FIX: วงกลมธีมสี + บรรทัดเดียว + ลดระยะขอบ + ปุ่มกลางจอ
+     13) การปรับแต่งเฉพาะหน้าจอมือถือ (Mobile Responsive Fix)
   ========================================================== */
   @media (max-width: 600px) {
     #venue-section {
@@ -1174,9 +1208,9 @@
       margin: 0 auto;
     }
   }
-  
+
   /* ==========================================================
-     FOOTER
+     14) ส่วนท้ายหน้าเว็บ (Footer)
   ========================================================== */
   footer {
     margin-top: auto;
@@ -1202,10 +1236,11 @@
 </head>
 <body class="intro-active">
 
+<!-- กล่องแสดงดอกไม้ลอยพื้นหลัง -->
 <div id="flowerContainer"></div>
 
 <!-- ==========================================================
-     ENVELOPE INTRO
+     หน้าปกซองจดหมายเปิดคำเชิญ (Envelope Intro)
 ========================================================== -->
 <div id="envelopeIntro">
   <div>
@@ -1234,20 +1269,25 @@
   </div>
 </div>
 
+<!-- ปุ่มเปิด/ปิดเพลงพื้นหลังและไฟล์เสียง -->
 <button class="sound-btn" id="soundBtn" aria-label="เปิด/ปิดเพลง">♪</button>
 <audio id="bgm" src="wedding-song.mp3" loop></audio>
 
-<!-- ========== 1) INVITATION CARDS ========== -->
+<!-- ==========================================================
+     1) ส่วนแสดงรูปภาพการ์ดแต่งงาน (จัดกึ่งกลางหน้าจอ)
+========================================================== -->
 <section class="reveal card-preview-section" id="wedding-card-section">
-  <div class="card-frame">
+  <div class="card-img-wrapper">
     <img src="8888.png" alt="การ์ดแต่งงาน Natjawa & Ikhlas รูปที่ 1" id="cardImage1">
   </div>
-  <div class="card-frame">
+  <div class="card-img-wrapper">
     <img src="9999.png" alt="การ์ดแต่งงาน Natjawa & Ikhlas รูปที่ 2" id="cardImage2">
   </div>
 </section>
 
-<!-- ========== 2) RING COUNTDOWN ========== -->
+<!-- ==========================================================
+     2) ส่วนนับถอยหลังสู่วันงาน (Countdown)
+========================================================== -->
 <section class="reveal" id="countdown-section">
   <span class="section-kicker">Save The Date</span>
   <h2 class="section-title">Countdown</h2>
@@ -1300,18 +1340,22 @@
   </div>
 </section>
 
-<!-- ========== 3) DUA & HADITH ARCH SWITCHER ========== -->
+<!-- ==========================================================
+     3) ส่วนดุอาและฮาดิษอวยพร (Dua & Hadith Switcher)
+========================================================== -->
 <section class="reveal" id="dua-section">
   <span class="section-kicker">Blessings</span>
   <h2 class="section-title">ดุอาและฮาดิษอวยพร</h2>
   <div class="ornament-line"><span class="ornament-diamond"></span></div>
 
+  <!-- ปุ่มสลับบทดุอาและฮาดิษ -->
   <div class="dua-tabs" role="tablist" aria-label="เลือกบทดุอาและฮาดิษ">
     <button type="button" class="dua-tab-btn active" data-dua="0">ดุอาที่ 1</button>
     <button type="button" class="dua-tab-btn" data-dua="1">ดุอาที่ 2</button>
     <button type="button" class="dua-tab-btn" data-dua="2">ฮาดิษ</button>
   </div>
 
+  <!-- การ์ดแสดงเนื้อหาดุอาและฮาดิษ -->
   <div class="arch-dua-card" id="archDuaCard">
     <span class="arch-badge" id="duaBadge">📖 ดุอา</span>
     <div class="arabic-text" id="duaArabic">بَارَكَ اللَّهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ</div>
@@ -1319,12 +1363,15 @@
   </div>
 </section>
 
-<!-- ========== 4) GUESTBOOK & MARQUEE ========== -->
+<!-- ==========================================================
+     4) ส่วนเขียนคำอวยพรและแถบคำอวยพรวิ่ง (Guestbook & Marquee)
+========================================================== -->
 <section class="reveal" id="wish-section">
   <span class="section-kicker">Wishes</span>
   <h2 class="section-title">เขียนคำอวยพร</h2>
   <div class="ornament-line"><span class="ornament-diamond"></span></div>
 
+  <!-- แบบฟอร์มส่งคำอวยพร -->
   <div class="glass-panel">
     <form id="wishForm">
       <input type="text" id="wishName" placeholder="ชื่อของคุณ" required>
@@ -1333,6 +1380,7 @@
     </form>
   </div>
 
+  <!-- หัวข้อคำอวยพรและปุ่มเปิดดูหน้าคำอวยพรทั้งหมด -->
   <div class="wishes-header-bar">
     <h3 class="wishes-board-label">คำอวยพรจากแขกผู้มีเกียรติ</h3>
     <button type="button" class="view-all-wishes-btn" id="openWishesPageBtn">
@@ -1342,6 +1390,7 @@
     </button>
   </div>
 
+  <!-- แถบคำอวยพรวิ่ง 3 แถว -->
   <div class="marquee-fullscreen-group">
     <div class="marquee-wrap"><div class="marquee-track track-1"></div></div>
     <div class="marquee-wrap"><div class="marquee-track track-2"></div></div>
@@ -1349,7 +1398,9 @@
   </div>
 </section>
 
-<!-- ========== 5) EVENT DETAILS ========== -->
+<!-- ==========================================================
+     5) ส่วนรายละเอียดงาน ธีมสี และแผนที่ (Event Details)
+========================================================== -->
 <section class="reveal" id="venue-section">
   <span class="section-kicker">The Celebration</span>
   <h2 class="section-title">รายละเอียดงาน</h2>
@@ -1380,7 +1431,9 @@
           <span class="timeline-val">ณ รร.แสงธรรมวิทยามูลนิธิ (จะนะ)</span>
         </div>
       </div>
+    </div>
 
+    <!-- สีธีมการแต่งกาย -->
     <div class="swatch-row" aria-label="ธีมการแต่งกาย">
       <span style="font-size:0.88rem; font-weight:600; margin-right:0.25rem;">ธีมการแต่งกาย:</span>
       <span class="swatch-dot" style="background-color:#D69A8E;"></span>
@@ -1390,13 +1443,16 @@
       <span class="swatch-dot" style="background-color:#DFE4EE;"></span>
     </div>
 
+    <!-- ปุ่มเปิดตำแหน่งบน Google Maps -->
     <a href="https://maps.app.goo.gl/L5VRE9kdC2bZ9fLs5" target="_blank" rel="noopener" class="map-btn">
       📍 ดูสถานที่ใน Google Maps
     </a>
   </div>
 </section>
 
-<!-- ========== 6) CONTACTS ========== -->
+<!-- ==========================================================
+     6) ส่วนช่องทางการติดต่อ (Contacts)
+========================================================== -->
 <section class="reveal" id="contact-section">
   <span class="section-kicker">Get In Touch</span>
   <h2 class="section-title">ช่องทางการติดต่อ</h2>
@@ -1416,12 +1472,13 @@
         <strong>แม่เจ้าสาว</strong>
         <a href="tel:0872948114">087-2948114</a>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ========== ALL WISHES FULL PAGE ========== -->
+<!-- ==========================================================
+     7) หน้าต่างแสดงคำอวยพรทั้งหมดแบบเต็มจอ (Full Page All Wishes)
+========================================================== -->
 <div class="all-wishes-page" id="allWishesPage" role="dialog" aria-modal="true" aria-labelledby="allWishesTitle">
   <div class="all-wishes-topbar">
     <button type="button" class="back-home-btn" id="backFromWishesBtn">
@@ -1438,7 +1495,9 @@
   </div>
 </div>
 
-<!-- ========== FLOATING DOCK ========== -->
+<!-- ==========================================================
+     8) แถบนำทางด้านล่าง (Floating Bottom Navigation)
+========================================================== -->
 <nav class="bottom-nav">
   <a href="#dua-section">
     <svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zm0 13.5L4.27 12 12 7.78 19.73 12 12 16.5z"/></svg>
@@ -1458,12 +1517,16 @@
   </a>
 </nav>
 
+<!-- ==========================================================
+     9) ส่วนท้ายหน้าเว็บ (Footer)
+========================================================== -->
 <footer>
   <h2>بَارَكَ اللَّهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا</h2>
   <div class="footer-sub">Natjawa &amp; Ikhlas · 09.01.2027 (9 มกราคม 2570)</div>
 </footer>
 
 <script>
+  // บังคับเลื่อนหน้ากลับไปด้านบนสุดเมื่อโหลดหรือรีเฟรชหน้า
   if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
   }
@@ -1472,7 +1535,7 @@
   });
 
   /* ==========================================================
-     FLOATING FLOWERS
+     1) ระบบสร้างดอกไม้ลอยพื้นหลัง (Floating Flowers)
   ========================================================== */
   const flowerContainer = document.getElementById('flowerContainer');
   const FLOWER_IMAGE_SRC = '114477.png';
@@ -1504,7 +1567,7 @@
   setInterval(createFlower, 700);
 
   /* ==========================================================
-     ENVELOPE INTRO
+     2) ระบบเปิดซองจดหมายและเริ่มเล่นเพลง (Envelope Intro)
   ========================================================== */
   const envelope = document.getElementById('envelope');
   const introScreen = document.getElementById('envelopeIntro');
@@ -1536,7 +1599,7 @@
   });
 
   /* ==========================================================
-     SCROLL REVEAL
+     3) ระบบตรวจจับการเลื่อนเพื่อแสดงแต่ละส่วน (Scroll Reveal)
   ========================================================== */
   const revealEls = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
@@ -1551,7 +1614,7 @@
   revealEls.forEach(el => observer.observe(el));
 
   /* ==========================================================
-     RING COUNTDOWN (9 มกราคม 2570 = 2027-01-09)
+     4) ระบบนับถอยหลังวันงานและวงแหวนความคืบหน้า (Ring Countdown)
   ========================================================== */
   const weddingDate = new Date('2027-01-09T10:00:00+07:00').getTime();
   const radius = 28;
@@ -1602,7 +1665,7 @@
   const timer = setInterval(updateCountdown, 1000);
 
   /* ==========================================================
-     INTERACTIVE DUA / HADITH SWITCHER
+     5) ระบบสลับบทดุอาและฮาดิษ (Interactive Dua & Hadith Switcher)
   ========================================================== */
   const duaItems = [
     {
@@ -1645,7 +1708,7 @@
   });
 
   /* ==========================================================
-     MARQUEE & FULL WISHES PAGE
+     6) ระบบคำอวยพร แถบวิ่ง และหน้าแสดงคำอวยพรทั้งหมด
   ========================================================== */
   const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwTlqRewP52vFEwgBThJOnQaro8UYK2yNmdJI7OinN9RCSd55o1QKrQQ76Q5zWY6Yg/exec";
 
@@ -1663,6 +1726,7 @@
 
   let savedMainScrollY = 0;
 
+  // แสดงรายการคำอวยพรทั้งหมดในหน้าต่างเต็มจอ
   function renderAllWishesList() {
     const total = allWishesStore.length;
     if (wishCountBadge) {
@@ -1702,6 +1766,7 @@
     });
   }
 
+  // เพิ่มคำอวยพรลงในแถบวิ่งแบบสุ่มแถว
   function addWishToRandomTrack(name, msg) {
     if (!tracks.length) return;
     const wishEl = document.createElement('div');
@@ -1712,6 +1777,7 @@
     tracks[randomIndex].appendChild(wishEl);
   }
 
+  // บันทึกคำอวยพรไม่ให้ซ้ำและอัปเดตทั้งแถบวิ่งและหน้ารวมคำอวยพร
   function registerWish(name, msg) {
     const wishKey = `${name}-${msg}`;
     if (displayedWishes.has(wishKey)) return false;
@@ -1723,6 +1789,7 @@
     return true;
   }
 
+  // เปิดและปิดหน้าแสดงคำอวยพรทั้งหมด
   function openAllWishesPage() {
     savedMainScrollY = window.scrollY;
     renderAllWishesList();
@@ -1747,6 +1814,7 @@
     }
   });
 
+  // ดึงคำอวยพรจาก Google Apps Script ทุก 3 วินาที
   async function fetchAndSyncWishes() {
     if (!GOOGLE_SCRIPT_URL) return;
     try {
@@ -1769,6 +1837,7 @@
   fetchAndSyncWishes();
   setInterval(fetchAndSyncWishes, 3000);
 
+  // ส่งคำอวยพรจากฟอร์ม
   const wishForm = document.getElementById('wishForm');
   const submitBtn = wishForm.querySelector('button[type="submit"]');
 
@@ -1811,7 +1880,7 @@
   });
 
   /* ==========================================================
-     SOUND BUTTON
+     7) ปุ่มเล่นและหยุดเพลงพื้นหลัง (Sound Toggle Button)
   ========================================================== */
   soundBtn.addEventListener('click', (e) => {
     e.stopPropagation();
