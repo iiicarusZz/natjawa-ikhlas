@@ -7,7 +7,7 @@
 
 <!-- โหลดฟอนต์ภาษาอังกฤษ ภาษาไทย และภาษาอาหรับ -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+Thai:wght@400;500;600&family=Sarabun:wght@300;400;500;600&family=Amiri:wght@400;700&family=Alex+Brush&family=Italianno&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+Thai:wght@400;500;600&family=Sarabun:wght@300;400;500;600&family=Amiri:wght@400;700&family=Alex+Brush&family=Italianno&family=Playball&family=Satisfy&family=Sacramento&family=Pinyon+Script&family=Allura&display=swap" rel="stylesheet">
 
 <style>
   /* ==========================================================
@@ -200,11 +200,11 @@
   }
 
   #envelopeIntro .couple-script {
-    font-family: 'Alex Brush', cursive;
-    font-size: clamp(2.9rem, 9vw, 4.3rem);
+    font-family: 'Allura', cursive;
+    font-size: clamp(5rem, 9vw, 4.3rem);
     line-height: 1.12;
     color: #ffffff;
-    margin-top: 0.25rem;
+    margin-top: 5rem;
     text-shadow: 0 3px 16px rgba(0, 0, 0, 0.35);
   }
 
@@ -252,7 +252,7 @@
   }
 
   .envelope-card .card-title {
-    font-family: 'Alex Brush', cursive;
+    font-family: 'Sacramento', cursive;
     font-size: 2rem;
     color: var(--ink-main);
   }
@@ -1256,6 +1256,76 @@
     font-size: 0.8rem;
     letter-spacing: 0.04em;
   }
+
+  /* 1. เอฟเฟกต์ชื่อบ่าวสาวมีประกายแสงวิ่งผ่านเบาๆ */
+  @keyframes textShimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+
+  /* เปลี่ยนชื่อคลาสตามที่ใช้กับ Natjawa Ikhlas (ถ้าใช้ h1 หรือ .intro-names) */
+  #envelopeIntro h1, .intro-names {
+    background: linear-gradient(90deg, #ffffff 0%, #ffffff 40%, #fff6d6 50%, #ffffff 60%, #ffffff 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textShimmer 5s linear infinite, fadeUpSlow 1.4s ease forwards;
+  }
+
+  /* 2. จังหวะค่อยๆ ปรากฏทีละบรรทัด */
+  @keyframes fadeUpSlow {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* 3. ปุ่มตราประทับ N&I มีคลื่นแสงชวนกด + ขอบลายประตู */
+  @keyframes sealPulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.65), 0 8px 18px rgba(11, 25, 40, 0.35); }
+    70% { box-shadow: 0 0 0 14px rgba(255, 255, 255, 0), 0 8px 18px rgba(11, 25, 40, 0.35); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0), 0 8px 18px rgba(11, 25, 40, 0.35); }
+  }
+
+  .envelope-seal {
+    animation: sealPulse 2.4s infinite;
+    cursor: pointer;
+  }
+
+  /* เพิ่มกรอบเส้นคู่ด้านในบานประตูซ้าย-ขวาให้ดูหรูขึ้น */
+  .env-part-left::after, .env-part-right::after {
+    content: "";
+    position: absolute;
+    top: 12px;
+    bottom: 12px;
+    width: calc(100% - 16px);
+    border: 1px solid rgba(74, 122, 166, 0.25);
+    pointer-events: none;
+  }
+  .env-part-left::after { left: 12px; border-right: none; border-radius: 8px 0 0 8px; }
+  .env-part-right::after { right: 12px; border-left: none; border-radius: 0 8px 8px 0; }
+
+  /* 4. ละอองแสงลอยขึ้นช้าๆ */
+  .intro-particles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .particle-dot {
+    position: absolute;
+    bottom: -10px;
+    background: radial-gradient(circle, rgba(255, 250, 224, 0.95) 0%, rgba(255, 255, 255, 0) 70%);
+    border-radius: 50%;
+    animation: floatUpParticle linear infinite;
+  }
+
+  @keyframes floatUpParticle {
+    0% { transform: translateY(0) scale(0.8); opacity: 0; }
+    20% { opacity: 0.85; }
+    80% { opacity: 0.6; }
+    100% { transform: translateY(-90vh) scale(1.2); opacity: 0; }
+  }
 </style>
 </head>
 <body class="intro-active">
@@ -1267,6 +1337,8 @@
      หน้าปกซองจดหมายเปิดคำเชิญ (Envelope Intro)
 ========================================================== -->
 <div id="envelopeIntro">
+  <div class="intro-particles" id="introParticles"></div>
+  
   <div>
     <p class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
     <p class="eyebrow">the beginning of</p>
@@ -2048,6 +2120,22 @@
     });
 
     centerObserver.observe(whiteBox);
+  })();
+
+  (function initIntroParticles() {
+    const container = document.getElementById('introParticles');
+    if (!container) return;
+    for (let i = 0; i < 22; i++) {
+      const dot = document.createElement('span');
+      dot.className = 'particle-dot';
+      const size = Math.random() * 4 + 2; // ขนาด 2px - 6px
+      dot.style.width = size + 'px';
+      dot.style.height = size + 'px';
+      dot.style.left = Math.random() * 100 + '%';
+      dot.style.animationDuration = (Math.random() * 7 + 6) + 's'; // ลอยช้าๆ 6-13 วินาที
+      dot.style.animationDelay = (Math.random() * 6) + 's';
+      container.appendChild(dot);
+    }
   })();
 
 </script>
