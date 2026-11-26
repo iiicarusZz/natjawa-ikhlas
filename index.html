@@ -1328,26 +1328,35 @@
   }
 
   #blessing-strip-section,
-  #blessing-strip-section .static-blessing-box {
+  #blessing-strip-section * {
     border: none !important;
     box-shadow: none !important;
+    outline: none !important;
+  }
+
+  #blessingWhiteBox > div,
+  #blessingArSlide,
+  #blessingEnSlide {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
   }
 
   @media (max-width: 600px) {
-    #blessing-strip-section .static-blessing-box {
-      padding: 1.1rem 0.65rem !important;
+    #blessingWhiteBox {
+      padding: 1rem 0.55rem !important;
     }
     #blessingArSlide {
-      font-size: 0.92rem !important;
-      line-height: 1.8 !important;
-      margin-bottom: 0.45rem !important;
+      font-size: 0.88rem !important;
+      line-height: 1.75 !important;
+      margin-bottom: 0.4rem !important;
     }
     #blessingEnSlide {
-      font-size: 0.78rem !important;
+      font-size: 0.75rem !important;
       line-height: 1.45 !important;
     }
   }
-  
+
 </style>
 </head>
 <body class="intro-active">
@@ -1407,17 +1416,15 @@
 </section>
 
 <!-- ==========================================================
-     แถบข้อความอวยพรอาหรับและแปลอังกฤษ (กลืนเป็นแถบเดียวไร้ขอบ จัดจำนวนบรรทัดให้กระชับ)
+     แถบสีขาวจางๆ บางๆ เต็มจอแบบไร้กรอบ + ตัวอักษรไหลเข้า
 ========================================================== -->
-<section class="static-blessing-bar" id="blessing-strip-section" style="max-width: none; width: 100%; padding: 0.4rem 0; margin: 0.5rem auto 1rem auto; animation: none; overflow: hidden;">
-  <div id="blessingWhiteBox" class="static-blessing-box" style="width: 100%; background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(244, 249, 255, 0.72) 18%, rgba(244, 249, 255, 0.72) 82%, rgba(255, 255, 255, 0) 100%); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); border: none; padding: 1.35rem 1rem; text-align: center; box-sizing: border-box; animation: none;">
-    <div style="max-width: 920px; margin: 0 auto; text-align: center;">
-      <!-- ข้อความอาหรับ: ปรับขนาดให้เรียงกระชับประมาณ 2 บรรทัด -->
-      <p id="blessingArSlide" class="static-blessing-ar" style="font-family: 'Amiri', serif; font-size: clamp(1rem, 2.3vw, 1.35rem); line-height: 1.9; color: var(--ink-main); direction: rtl; text-align: center; margin: 0 auto 0.6rem auto; opacity: 0; transform: translateX(64px); transition: transform 1.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 1.6s ease; will-change: transform, opacity;">
+<section class="static-blessing-bar" id="blessing-strip-section" style="max-width: none; width: 100%; margin: 0.75rem auto; padding: 0.4rem 0; background: transparent; border: none; box-shadow: none; overflow: hidden;">
+  <div id="blessingWhiteBox" class="static-blessing-box" style="width: 100%; max-width: none; background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.36) 20%, rgba(255, 255, 255, 0.36) 80%, rgba(255, 255, 255, 0) 100%); border: none; box-shadow: none; border-radius: 0; padding: 1.25rem 0.9rem; text-align: center; box-sizing: border-box;">
+    <div style="width: 100%; max-width: 920px; margin: 0 auto; background: transparent; border: none; box-shadow: none; text-align: center;">
+      <p id="blessingArSlide" class="static-blessing-ar" style="font-family: 'Amiri', serif; font-size: clamp(0.95rem, 2.2vw, 1.32rem); line-height: 1.85; color: var(--ink-main); direction: rtl; text-align: center; background: transparent; border: none; box-shadow: none; margin: 0 auto 0.55rem auto; opacity: 0; transform: translateX(64px); transition: transform 1.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 1.6s ease; will-change: transform, opacity;">
         جَمَعَ اللهُ بَيْنَ قَلْبَيْنِ كَتَبَ لَهُمَا اللِّقَاءَ، فَأَصْبَحَتِ الْمَوَدَّةُ لُغَتَهُمَا، وَالرَّحْمَةُ طَرِيقَهُمَا، وَالثِّقَةُ أَسَاسَ بَيْتِهِمَا، وَالدُّعَاءُ زَادَ رِحْلَتَهُمَا، فَنَسْأَلُ اللهَ أَنْ يُدِيمَ عَلَيْهِمَا نِعْمَةَ الْأُلْفَةِ وَالسَّعَادَةِ وَالْبَرَكَةِ مَا دَامَتِ السَّمَاوَاتُ وَالْأَرْضُ.
       </p>
-      <!-- ข้อความภาษาอังกฤษ: ปรับขนาดให้เรียงกระชับไม่เกิน 3 บรรทัด -->
-      <p id="blessingEnSlide" class="static-blessing-en" style="font-family: var(--font-display); font-style: italic; font-size: clamp(0.84rem, 1.85vw, 1.05rem); line-height: 1.55; color: var(--ink-sub); text-align: center; margin: 0 auto; opacity: 0; transform: translateX(-64px); transition: transform 1.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 1.6s ease; will-change: transform, opacity;">
+      <p id="blessingEnSlide" class="static-blessing-en" style="font-family: var(--font-display); font-style: italic; font-size: clamp(0.8rem, 1.8vw, 1.02rem); line-height: 1.5; color: var(--ink-sub); text-align: center; background: transparent; border: none; box-shadow: none; margin: 0 auto; opacity: 0; transform: translateX(-64px); transition: transform 1.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 1.6s ease; will-change: transform, opacity;">
         Allah united two hearts destined to meet. Affection became their language, mercy their path, trust the foundation of their home, and supplication the provision for their journey. We ask Allah to grant them everlasting harmony, happiness, and blessings.
       </p>
     </div>
