@@ -30,18 +30,15 @@
     --font-body: 'Sarabun', sans-serif;
   }
 
-  /* การเลื่อนหน้าจอแบบนุ่มนวล */
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 0;
   }
 
-  /* บังคับคำนวณขนาดกล่องรวมขอบและ padding ให้ถูกต้องทุกองค์ประกอบ */
   *, *::before, *::after {
     box-sizing: border-box;
   }
 
-  /* โครงสร้างหน้าเว็บหลักและพื้นหลังไล่เฉดฟ้าเย็น */
   body {
     margin: 0;
     background: var(--sky-bg);
@@ -56,19 +53,16 @@
     min-height: 100vh;
   }
 
-  /* ล็อกการเลื่อนหน้าหลังเมื่อเปิดหน้าคำอวยพรทั้งหมด */
   body.modal-open {
     overflow: hidden;
   }
 
-  /* หัวข้อหลักและหัวข้อย่อย */
   h1, h2, h3 {
     font-family: var(--font-display);
     font-weight: 500;
     margin: 0;
   }
 
-  /* โครงสร้างแต่ละส่วน (Section) จัดกึ่งกลางหน้าจอ */
   section {
     max-width: 620px;
     margin-left: auto;
@@ -80,7 +74,6 @@
     z-index: 2;
   }
 
-  /* ข้อความตัวเอียงนำหน้าหัวข้อแต่ละส่วน */
   .section-kicker {
     font-family: var(--font-display);
     font-style: italic;
@@ -91,14 +84,12 @@
     margin-bottom: 0.25rem;
   }
 
-  /* ชื่อหัวข้อแต่ละส่วน */
   .section-title {
     font-size: clamp(1.85rem, 5vw, 2.35rem);
     color: var(--ink-main);
     letter-spacing: 0.02em;
   }
 
-  /* เส้นคั่นตกแต่งพร้อมเพชรตรงกลาง */
   .ornament-line {
     display: flex;
     align-items: center;
@@ -189,6 +180,8 @@
   #envelopeIntro .bismillah {
     font-family: 'Amiri', serif;
     font-size: clamp(1.5rem, 4vw, 2rem);
+    position: relative;
+    z-index: 2;
   }
 
   #envelopeIntro .eyebrow {
@@ -197,15 +190,17 @@
     text-transform: uppercase;
     color: #d7e9f8;
     margin-top: 0.85rem;
+    position: relative;
+    z-index: 2;
   }
 
   #envelopeIntro .couple-script {
     font-family: 'Allura', cursive;
-    font-size: clamp(5rem, 9vw, 4.3rem);
+    font-size: clamp(3.2rem, 8.5vw, 4.6rem);
     line-height: 1.12;
-    color: #ffffff;
-    margin-top: 4rem;
-    text-shadow: 0 3px 16px rgba(0, 0, 0, 0.35);
+    margin-top: 3rem;
+    position: relative;
+    z-index: 2;
   }
 
   #envelopeIntro .open-hint {
@@ -213,20 +208,22 @@
     letter-spacing: 0.08em;
     color: #e6f2fc;
     animation: pulseText 1.8s infinite ease-in-out;
+    position: relative;
+    z-index: 2;
   }
 
   @keyframes pulseText {
     0%, 100% { opacity: 0.6; transform: scale(0.98); }
     50% { opacity: 1; transform: scale(1); }
   }
-  
-  /* === แบบที่ 4: การ์ดบานพับเปิดซ้าย-ขวาแบบประตู === */
+
   .envelope-wrapper {
     width: 280px;
     height: 220px;
     position: relative;
     perspective: 1400px;
     margin: 1.2rem auto 0 auto;
+    z-index: 2;
   }
 
   .envelope {
@@ -237,7 +234,6 @@
     box-shadow: 0 24px 48px rgba(7, 18, 30, 0.45);
   }
 
-  /* การ์ดด้านในที่อยู่หลังประตู */
   .envelope-card {
     position: absolute;
     inset: 0;
@@ -264,7 +260,6 @@
     color: var(--ink-sub);
   }
 
-  /* บานประตูซ้าย */
   .env-part-left {
     position: absolute;
     top: 0;
@@ -280,7 +275,6 @@
     box-shadow: inset 0 0 0 6px rgba(255, 255, 255, 0.35);
   }
 
-  /* บานประตูขวา */
   .env-part-right {
     position: absolute;
     top: 0;
@@ -296,7 +290,6 @@
     box-shadow: inset 0 0 0 6px rgba(255, 255, 255, 0.35);
   }
 
-  /* ตราประทับเชื่อมตรงกลางบานประตู */
   .envelope-seal {
     position: absolute;
     top: 50%;
@@ -315,12 +308,15 @@
     color: #ffffff;
     font-size: 1.3rem;
     z-index: 4;
+    cursor: pointer;
     transition: opacity 0.35s ease, transform 0.35s ease;
+    animation: sealPulse 2.4s infinite;
   }
 
   .envelope.opened .envelope-seal {
     opacity: 0;
     transform: translate(-50%, -50%) scale(0.5);
+    pointer-events: none;
   }
   .envelope.opened .env-part-left {
     transform: rotateY(-135deg);
@@ -343,7 +339,7 @@
   }
 
   /* ==========================================================
-     5) ส่วนแสดงรูปภาพการ์ดแต่งงาน (จัดกึ่งกลางและปรับสเกล 2 รูปให้สมดุล)
+     5) ส่วนแสดงรูปภาพการ์ดแต่งงาน
   ========================================================== */
   .card-preview-section {
     padding-top: 2rem;
@@ -387,20 +383,13 @@
     filter: drop-shadow(0 10px 25px rgba(27, 52, 76, 0.1));
   }
 
-  /* ขนาดรูปการ์ดบนหน้าจอมือถือและจอทั่วไป */
-  #cardImage1 {
-    width: 100%;
-    max-width: 520px;
-    margin: 0 auto;
-  }
-
+  #cardImage1,
   #cardImage2 {
     width: 100%;
     max-width: 520px;
     margin: 0 auto;
   }
 
-  /* ขนาดรูปการ์ดบนหน้าจอแท็บเล็ตและคอมพิวเตอร์ */
   @media (min-width: 768px) {
     .card-preview-section {
       max-width: 920px;
@@ -416,61 +405,6 @@
     }
   }
 
-  /* เส้นคั่นบาง */
-  .divider {
-    width: 60px;
-    height: 2px;
-    background: linear-gradient(90deg, transparent 0%, #5e8bb4 50%, transparent 100%);
-    margin: 1.75rem auto;
-    opacity: 0.85;
-  }
-  /* ==========================================================
-     แถบข้อความอวยพรนิ่งกลางจอ (ชื่อคลาสใหม่ ไม่ชนของเก่า)
-  ========================================================== */
-  .static-blessing-bar {
-    width: 100vw;
-    max-width: none;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(255, 255, 255, 0.58);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border-top: 1px solid rgba(255, 255, 255, 0.78);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.78);
-    padding: 1.5rem 1.25rem;
-    margin: 0.75rem 0 1.25rem 0;
-    box-shadow: 0 6px 20px rgba(33, 66, 97, 0.05);
-    animation: none !important;
-  }
-
-  .static-blessing-box {
-    max-width: 680px;
-    margin: 0 auto;
-    text-align: center;
-    animation: none !important;
-  }
-
-  .static-blessing-ar {
-    font-family: 'Amiri', serif;
-    font-size: clamp(1.22rem, 3.8vw, 1.52rem);
-    line-height: 2.05;
-    color: var(--ink-main);
-    direction: rtl;
-    text-align: center;
-    margin: 0 auto 0.85rem auto;
-  }
-
-  .static-blessing-en {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: clamp(0.98rem, 2.8vw, 1.15rem);
-    line-height: 1.65;
-    color: var(--ink-sub);
-    text-align: center;
-    margin: 0 auto;
-  }
-  
   /* ==========================================================
      6) ตัวนับถอยหลังแบบวงแหวน (Ring Countdown)
   ========================================================== */
@@ -540,7 +474,7 @@
   }
 
   /* ==========================================================
-     7) ส่วนดุอาและฮาดิษอวยพร (ปุ่มสลับบท + การ์ดหัวโค้ง)
+     7) ส่วนดุอาและฮาดิษอวยพร
   ========================================================== */
   .dua-tabs {
     display: inline-flex;
@@ -621,7 +555,7 @@
   }
 
   /* ==========================================================
-     8) ฟอร์มเขียนคำอวยพรและแถบคำอวยพรวิ่ง (Guestbook & Marquee)
+     8) ฟอร์มเขียนคำอวยพรและแถบคำอวยพรวิ่ง
   ========================================================== */
   .glass-panel {
     background: var(--glass-strong);
@@ -687,7 +621,6 @@
     cursor: not-allowed;
   }
 
-  /* แถบหัวข้อคำอวยพรและปุ่มเปิดดูทั้งหมด */
   .wishes-header-bar {
     display: flex;
     align-items: center;
@@ -729,7 +662,6 @@
     transform: translateY(-1px);
   }
 
-  /* รางข้อความคำอวยพรวิ่ง 3 แถวเต็มความกว้างจอ */
   .marquee-fullscreen-group {
     display: flex;
     flex-direction: column;
@@ -787,14 +719,12 @@
     gap: 0.35rem;
   }
 
-  /* ชื่อผู้เขียนเป็นตัวหนา */
   .wish-author {
     font-weight: 700;
     font-size: 0.88rem;
     color: var(--ink-main);
   }
 
-  /* ข้อความคำอวยพรเป็นตัวเล็กลงกว่าชื่อ */
   .wish-text {
     font-weight: 400;
     font-size: 0.78rem;
@@ -802,7 +732,7 @@
   }
 
   /* ==========================================================
-     9) หน้าแสดงคำอวยพรทั้งหมดแบบเต็มจอ (Full Page All Wishes)
+     9) หน้าแสดงคำอวยพรทั้งหมดแบบเต็มจอ
   ========================================================== */
   .all-wishes-page {
     position: fixed;
@@ -823,7 +753,6 @@
     transform: translateY(0);
   }
 
-  /* แถบด้านบนของหน้ารวมคำอวยพร */
   .all-wishes-topbar {
     position: sticky;
     top: 0;
@@ -887,7 +816,6 @@
     transform: scale(1.06);
   }
 
-  /* รายการการ์ดคำอวยพรทั้งหมด */
   .all-wishes-container {
     max-width: 680px;
     margin: 0 auto;
@@ -944,7 +872,7 @@
   }
 
   /* ==========================================================
-     10) รายละเอียดงาน ธีมสี และปุ่มแผนที่ (Event Details)
+     10) รายละเอียดงาน ธีมสี และปุ่มแผนที่
   ========================================================== */
   .timeline-list {
     display: flex;
@@ -987,7 +915,6 @@
     font-weight: 600;
   }
 
-  /* แถบวงกลมสีธีมการแต่งกาย */
   .swatch-row {
     display: flex;
     justify-content: center;
@@ -1029,7 +956,7 @@
   }
 
   /* ==========================================================
-     11) ช่องทางการติดต่อ (Contacts - เรียงแนวดิ่งและกล่องกระชับ)
+     11) ช่องทางการติดต่อ
   ========================================================== */
   .contact-box {
     max-width: 390px;
@@ -1074,7 +1001,7 @@
   }
 
   /* ==========================================================
-     12) ปุ่มเปิด/ปิดเพลง และแถบเมนูด้านล่าง (Sound & Floating Dock)
+     12) ปุ่มเปิด/ปิดเพลง และแถบเมนูด้านล่าง
   ========================================================== */
   .sound-btn {
     position: fixed;
@@ -1155,7 +1082,7 @@
   }
 
   /* ==========================================================
-     13) การปรับแต่งเฉพาะหน้าจอมือถือ (Mobile Responsive Fix)
+     13) การปรับแต่งเฉพาะหน้าจอมือถือ
   ========================================================== */
   @media (max-width: 600px) {
     #venue-section {
@@ -1234,7 +1161,7 @@
   }
 
   /* ==========================================================
-     14) ส่วนท้ายหน้าเว็บ (Footer)
+     14) ส่วนท้ายหน้าเว็บ
   ========================================================== */
   footer {
     margin-top: auto;
@@ -1257,13 +1184,14 @@
     letter-spacing: 0.04em;
   }
 
-  /* 1. เอฟเฟกต์ชื่อบ่าวสาวมีประกายแสงวิ่งผ่านเบาๆ */
+  /* ==========================================================
+     15) ลูกเล่นแอนิเมชันหน้าปกและแถบข้อความอวยพร
+  ========================================================== */
   @keyframes textShimmer {
     0% { background-position: -200% center; }
     100% { background-position: 200% center; }
   }
 
-  /* เปลี่ยนชื่อคลาสตามที่ใช้กับ Natjawa Ikhlas (ถ้าใช้ h1 หรือ .intro-names) */
   #envelopeIntro h1, .intro-names {
     background: linear-gradient(90deg, #ffffff 0%, #ffffff 40%, #fff6d6 50%, #ffffff 60%, #ffffff 100%);
     background-size: 200% auto;
@@ -1272,25 +1200,17 @@
     animation: textShimmer 5s linear infinite, fadeUpSlow 1.4s ease forwards;
   }
 
-  /* 2. จังหวะค่อยๆ ปรากฏทีละบรรทัด */
   @keyframes fadeUpSlow {
     from { opacity: 0; transform: translateY(14px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* 3. ปุ่มตราประทับ N&I มีคลื่นแสงชวนกด + ขอบลายประตู */
   @keyframes sealPulse {
     0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.65), 0 8px 18px rgba(11, 25, 40, 0.35); }
     70% { box-shadow: 0 0 0 14px rgba(255, 255, 255, 0), 0 8px 18px rgba(11, 25, 40, 0.35); }
     100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0), 0 8px 18px rgba(11, 25, 40, 0.35); }
   }
 
-  .envelope-seal {
-    animation: sealPulse 2.4s infinite;
-    cursor: pointer;
-  }
-
-  /* เพิ่มกรอบเส้นคู่ด้านในบานประตูซ้าย-ขวาให้ดูหรูขึ้น */
   .env-part-left::after, .env-part-right::after {
     content: "";
     position: absolute;
@@ -1303,7 +1223,6 @@
   .env-part-left::after { left: 12px; border-right: none; border-radius: 8px 0 0 8px; }
   .env-part-right::after { right: 12px; border-left: none; border-radius: 0 8px 8px 0; }
 
-  /* 4. ละอองแสงลอยขึ้นช้าๆ */
   .intro-particles {
     position: absolute;
     inset: 0;
@@ -1344,19 +1263,58 @@
 
   @media (max-width: 600px) {
     #blessingWhiteBox {
-      padding: 1rem 0.55rem !important;
+      padding: 1.05rem 0.45rem !important;
     }
     #blessingArSlide {
-      font-size: 0.88rem !important;
-      line-height: 1.75 !important;
-      margin-bottom: 0.4rem !important;
+      font-size: 0.78rem !important;
+      line-height: 1.8 !important;
+      margin-bottom: 0.45rem !important;
     }
     #blessingEnSlide {
-      font-size: 0.75rem !important;
-      line-height: 1.45 !important;
+      font-size: 0.68rem !important;
+      line-height: 1.48 !important;
     }
   }
 
+  /* ไฮไลต์เมนูด้านล่างตามส่วนที่กำลังเลื่อนดู */
+  .bottom-nav a.active-nav {
+    background: rgba(86, 135, 181, 0.22);
+    color: #16324d;
+    font-weight: 600;
+  }
+
+  /* ลูกเล่นปุ่มติดต่อให้ดูน่ากดและมีไอคอนโทรศัพท์ */
+  .contact-tile a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.3rem 0.65rem;
+    border-radius: 999px;
+    background: rgba(86, 135, 181, 0.1);
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .contact-tile a::before {
+    content: "📞";
+    font-size: 0.85rem;
+  }
+
+  .contact-tile a:hover {
+    background: rgba(86, 135, 181, 0.22);
+    transform: scale(1.03);
+    text-decoration: none;
+  }
+
+  /* ลูกเล่นตอนชี้/แตะวงแหวนนับถอยหลัง */
+  .ring-item {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .ring-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 30px rgba(33, 66, 97, 0.13);
+  }
+  
 </style>
 </head>
 <body class="intro-active">
@@ -1382,17 +1340,14 @@
     <div class="envelope-wrapper">
       <div class="envelope" id="envelope">
         <div class="envelope-inner"></div>
-        <!-- การ์ดด้านใน -->
         <div class="envelope-card">
           <span class="card-title">Natjawa &amp; Ikhlas</span>
           <span class="card-sub">09 · 01 · 2027</span>
         </div>
-        <!-- ชิ้นส่วนซอง/บานพับ -->
         <div class="env-part-left"></div>
         <div class="env-part-right"></div>
         <div class="env-part-bottom"></div>
         <div class="env-part-top"></div>
-        <!-- ตราประทับ / โบว์ตรงกลาง -->
         <div class="envelope-seal">N&amp; I</div>
       </div>
     </div>
@@ -1404,7 +1359,7 @@
 <audio id="bgm" src="vidssave.com Wedding Nasheed (Music Free) ᴴᴰ _ Eng Subs _ Muhamad Al Muqit 128KBPS.mp3" loop></audio>
 
 <!-- ==========================================================
-     1) ส่วนแสดงรูปภาพการ์ดแต่งงาน (จัดกึ่งกลางหน้าจอ)
+     1) ส่วนแสดงรูปภาพการ์ดแต่งงาน
 ========================================================== -->
 <section class="reveal card-preview-section" id="wedding-card-section">
   <div class="card-img-wrapper">
@@ -1416,15 +1371,16 @@
 </section>
 
 <!-- ==========================================================
-     แถบสีขาวจางๆ บางๆ เต็มจอแบบไร้กรอบ + ตัวอักษรไหลเข้า
+     แถบสีขาวจางๆ เต็มจอแบบไร้กรอบ + ข้อความเรียง 3 บรรทัดสวยๆ
 ========================================================== -->
 <section class="static-blessing-bar" id="blessing-strip-section" style="max-width: none; width: 100%; margin: 0.75rem auto; padding: 0.4rem 0; background: transparent; border: none; box-shadow: none; overflow: hidden;">
-  <div id="blessingWhiteBox" class="static-blessing-box" style="width: 100%; max-width: none; background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.36) 20%, rgba(255, 255, 255, 0.36) 80%, rgba(255, 255, 255, 0) 100%); border: none; box-shadow: none; border-radius: 0; padding: 1.25rem 0.9rem; text-align: center; box-sizing: border-box;">
-    <div style="width: 100%; max-width: 920px; margin: 0 auto; background: transparent; border: none; box-shadow: none; text-align: center;">
-      <p id="blessingArSlide" class="static-blessing-ar" style="font-family: 'Amiri', serif; font-size: clamp(0.95rem, 2.2vw, 1.32rem); line-height: 1.85; color: var(--ink-main); direction: rtl; text-align: center; background: transparent; border: none; box-shadow: none; margin: 0 auto 0.55rem auto; opacity: 0; transform: translateX(64px); transition: transform 1.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 1.6s ease; will-change: transform, opacity;">
+  <!-- แก้สีแถบที่ background ด้านล่าง (ตัวที่ 1 และตัวสุดท้ายเป็น 0 เพื่อละลายขอบบน-ล่าง) -->
+  <div id="blessingWhiteBox" class="static-blessing-box" style="width: 100%; max-width: none; background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.36) 20%, rgba(255, 255, 255, 0.36) 80%, rgba(255, 255, 255, 0) 100%); border: none; box-shadow: none; border-radius: 0; padding: 1.35rem 0.85rem; text-align: center; box-sizing: border-box;">
+    <div style="width: 100%; max-width: 660px; margin: 0 auto; background: transparent; border: none; box-shadow: none; text-align: center;">
+      <p id="blessingArSlide" class="static-blessing-ar" style="font-family: 'Amiri', serif; font-size: clamp(0.92rem, 2.5vw, 1.32rem); line-height: 1.9; color: var(--ink-main); direction: rtl; text-align: center; background: transparent; border: none; box-shadow: none; margin: 0 auto 0.65rem auto; opacity: 0; transform: translateX(64px); transition: transform 1.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 1.6s ease; will-change: transform, opacity;">
         جَمَعَ اللهُ بَيْنَ قَلْبَيْنِ كَتَبَ لَهُمَا اللِّقَاءَ، فَأَصْبَحَتِ الْمَوَدَّةُ لُغَتَهُمَا، وَالرَّحْمَةُ طَرِيقَهُمَا، وَالثِّقَةُ أَسَاسَ بَيْتِهِمَا، وَالدُّعَاءُ زَادَ رِحْلَتَهُمَا، فَنَسْأَلُ اللهَ أَنْ يُدِيمَ عَلَيْهِمَا نِعْمَةَ الْأُلْفَةِ وَالسَّعَادَةِ وَالْبَرَكَةِ مَا دَامَتِ السَّمَاوَاتُ وَالْأَرْضُ.
       </p>
-      <p id="blessingEnSlide" class="static-blessing-en" style="font-family: var(--font-display); font-style: italic; font-size: clamp(0.8rem, 1.8vw, 1.02rem); line-height: 1.5; color: var(--ink-sub); text-align: center; background: transparent; border: none; box-shadow: none; margin: 0 auto; opacity: 0; transform: translateX(-64px); transition: transform 1.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 1.6s ease; will-change: transform, opacity;">
+      <p id="blessingEnSlide" class="static-blessing-en" style="font-family: var(--font-display); font-style: italic; font-size: clamp(0.76rem, 2vw, 1.02rem); line-height: 1.55; color: var(--ink-sub); text-align: center; background: transparent; border: none; box-shadow: none; margin: 0 auto; opacity: 0; transform: translateX(-64px); transition: transform 1.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 1.6s ease; will-change: transform, opacity;">
         Allah united two hearts destined to meet. Affection became their language, mercy their path, trust the foundation of their home, and supplication the provision for their journey. We ask Allah to grant them everlasting harmony, happiness, and blessings.
       </p>
     </div>
@@ -1487,21 +1443,19 @@
 </section>
 
 <!-- ==========================================================
-     3) ส่วนดุอาและฮาดิษอวยพร (Dua & Hadith Switcher)
+     3) ส่วนดุอาและฮาดิษอวยพร
 ========================================================== -->
 <section class="reveal" id="dua-section">
   <span class="section-kicker">Blessings</span>
   <h2 class="section-title">ดุอาและฮาดิษอวยพร</h2>
   <div class="ornament-line"><span class="ornament-diamond"></span></div>
 
-  <!-- ปุ่มสลับบทดุอาและฮาดิษ -->
   <div class="dua-tabs" role="tablist" aria-label="เลือกบทดุอาและฮาดิษ">
     <button type="button" class="dua-tab-btn active" data-dua="0">ดุอาที่ 1</button>
     <button type="button" class="dua-tab-btn" data-dua="1">ดุอาที่ 2</button>
     <button type="button" class="dua-tab-btn" data-dua="2">ฮาดิษ</button>
   </div>
 
-  <!-- การ์ดแสดงเนื้อหาดุอาและฮาดิษ -->
   <div class="arch-dua-card" id="archDuaCard">
     <span class="arch-badge" id="duaBadge">📖 ดุอา</span>
     <div class="arabic-text" id="duaArabic">بَارَكَ اللَّهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ</div>
@@ -1510,14 +1464,13 @@
 </section>
 
 <!-- ==========================================================
-     4) ส่วนเขียนคำอวยพรและแถบคำอวยพรวิ่ง (Guestbook & Marquee)
+     4) ส่วนเขียนคำอวยพรและแถบคำอวยพรวิ่ง
 ========================================================== -->
 <section class="reveal" id="wish-section">
   <span class="section-kicker">Wishes</span>
   <h2 class="section-title">เขียนคำอวยพร</h2>
   <div class="ornament-line"><span class="ornament-diamond"></span></div>
 
-  <!-- แบบฟอร์มส่งคำอวยพร -->
   <div class="glass-panel">
     <form id="wishForm">
       <input type="text" id="wishName" placeholder="ชื่อของคุณ" required>
@@ -1526,7 +1479,6 @@
     </form>
   </div>
 
-  <!-- หัวข้อคำอวยพรและปุ่มเปิดดูหน้าคำอวยพรทั้งหมด -->
   <div class="wishes-header-bar">
     <h3 class="wishes-board-label">คำอวยพรจากแขกผู้มีเกียรติ</h3>
     <button type="button" class="view-all-wishes-btn" id="openWishesPageBtn">
@@ -1536,7 +1488,6 @@
     </button>
   </div>
 
-  <!-- แถบคำอวยพรวิ่ง 3 แถว -->
   <div class="marquee-fullscreen-group">
     <div class="marquee-wrap"><div class="marquee-track track-1"></div></div>
     <div class="marquee-wrap"><div class="marquee-track track-2"></div></div>
@@ -1545,7 +1496,7 @@
 </section>
 
 <!-- ==========================================================
-     5) ส่วนรายละเอียดงาน ธีมสี และแผนที่ (Event Details)
+     5) ส่วนรายละเอียดงาน ธีมสี และแผนที่
 ========================================================== -->
 <section class="reveal" id="venue-section">
   <span class="section-kicker">The Celebration</span>
@@ -1579,7 +1530,6 @@
       </div>
     </div>
 
-    <!-- สีธีมการแต่งกาย -->
     <div class="swatch-row" aria-label="ธีมการแต่งกาย">
       <span style="font-size:0.88rem; font-weight:600; margin-right:0.25rem;">ธีมการแต่งกาย:</span>
       <span class="swatch-dot" style="background-color:#D69A8E;"></span>
@@ -1589,7 +1539,6 @@
       <span class="swatch-dot" style="background-color:#DFE4EE;"></span>
     </div>
 
-    <!-- ปุ่มเปิดตำแหน่งบน Google Maps -->
     <a href="https://maps.app.goo.gl/L5VRE9kdC2bZ9fLs5" target="_blank" rel="noopener" class="map-btn">
       📍 ดูสถานที่ใน Google Maps
     </a>
@@ -1597,7 +1546,7 @@
 </section>
 
 <!-- ==========================================================
-     6) ส่วนช่องทางการติดต่อ (Contacts)
+     6) ส่วนช่องทางการติดต่อ
 ========================================================== -->
 <section class="reveal" id="contact-section">
   <span class="section-kicker">Get In Touch</span>
@@ -1623,7 +1572,7 @@
 </section>
 
 <!-- ==========================================================
-     7) หน้าต่างแสดงคำอวยพรทั้งหมดแบบเต็มจอ (Full Page All Wishes)
+     7) หน้าต่างแสดงคำอวยพรทั้งหมดแบบเต็มจอ
 ========================================================== -->
 <div class="all-wishes-page" id="allWishesPage" role="dialog" aria-modal="true" aria-labelledby="allWishesTitle">
   <div class="all-wishes-topbar">
@@ -1642,7 +1591,7 @@
 </div>
 
 <!-- ==========================================================
-     8) แถบนำทางด้านล่าง (Floating Bottom Navigation)
+     8) แถบนำทางด้านล่าง
 ========================================================== -->
 <nav class="bottom-nav">
   <a href="#dua-section">
@@ -1664,7 +1613,7 @@
 </nav>
 
 <!-- ==========================================================
-     9) ส่วนท้ายหน้าเว็บ (Footer)
+     9) ส่วนท้ายหน้าเว็บ
 ========================================================== -->
 <footer>
   <h2>بَارَكَ اللَّهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا</h2>
@@ -1672,7 +1621,6 @@
 </footer>
 
 <script>
-  // บังคับเลื่อนหน้ากลับไปด้านบนสุดเมื่อโหลดหรือรีเฟรชหน้า
   if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
   }
@@ -1681,7 +1629,7 @@
   });
 
   /* ==========================================================
-     1) ระบบสร้างดอกไม้ลอยพื้นหลัง (Floating Flowers)
+     1) ระบบสร้างดอกไม้ลอยพื้นหลัง
   ========================================================== */
   const flowerContainer = document.getElementById('flowerContainer');
   const FLOWER_IMAGE_SRC = '114477.png';
@@ -1712,17 +1660,17 @@
 
   setInterval(createFlower, 700);
 
-/* ==========================================================
-     2) ระบบเปิดซองจดหมายและเริ่มเล่นเพลงที่วินาทีที่ 9 (Envelope Intro)
+  /* ==========================================================
+     2) ระบบเปิดซองจดหมายและเริ่มเล่นเพลงที่วินาทีที่ 9
   ========================================================== */
   const envelope = document.getElementById('envelope');
+  const envelopeSeal = document.querySelector('.envelope-seal');
   const introScreen = document.getElementById('envelopeIntro');
   const bgm = document.getElementById('bgm');
   const soundBtn = document.getElementById('soundBtn');
-  const START_AT_SECONDS = 8;
+  const START_AT_SECONDS = 9;
   let isPlaying = false;
 
-  // ฟังก์ชันตั้งจุดเริ่มเล่นเพลงและสั่งเล่น
   function playMusicFromStartTime() {
     const musicSrc = bgm.getAttribute('src');
     if (!musicSrc || musicSrc.trim() === '') {
@@ -1740,7 +1688,6 @@
       bgm.playbackRate = 0.87;
 
       return bgm.play().then(() => {
-        // ย้ำ currentTime อีกครั้งหลัง play() ในกรณีบางเบราว์เซอร์รีเซ็ตจุดเริ่ม
         if (Math.abs(bgm.currentTime - START_AT_SECONDS) > 0.5 && bgm.duration > START_AT_SECONDS) {
           bgm.currentTime = START_AT_SECONDS;
         }
@@ -1761,8 +1708,8 @@
     });
   }
 
-  introScreen.addEventListener('click', () => {
-    if (envelope.classList.contains('opened')) return;
+  function openEnvelopeIntro() {
+    if (!envelope || !introScreen || envelope.classList.contains('opened')) return;
 
     envelope.classList.add('opened');
     window.scrollTo({ top: 0, behavior: 'instant' });
@@ -1776,7 +1723,15 @@
       document.body.classList.remove('intro-active');
       window.scrollTo({ top: 0, behavior: 'instant' });
     }, 2400);
-  });
+  }
+
+  introScreen.addEventListener('click', openEnvelopeIntro);
+  if (envelopeSeal) {
+    envelopeSeal.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openEnvelopeIntro();
+    });
+  }
 
   /* ==========================================================
      3) ระบบตรวจจับการเลื่อนเพื่อแสดงแต่ละส่วน (Scroll Reveal)
@@ -1794,7 +1749,7 @@
   revealEls.forEach(el => observer.observe(el));
 
   /* ==========================================================
-     4) ระบบนับถอยหลังวันงานและวงแหวนความคืบหน้า (Ring Countdown)
+     4) ระบบนับถอยหลังวันงานและวงแหวนความคืบหน้า
   ========================================================== */
   const weddingDate = new Date('2027-01-09T10:00:00+07:00').getTime();
   const radius = 28;
@@ -1845,7 +1800,7 @@
   const timer = setInterval(updateCountdown, 1000);
 
   /* ==========================================================
-     5) ระบบสลับบทดุอาและฮาดิษ (Interactive Dua & Hadith Switcher)
+     5) ระบบสลับบทดุอาและฮาดิษ
   ========================================================== */
   const duaItems = [
     {
@@ -1906,7 +1861,6 @@
 
   let savedMainScrollY = 0;
 
-  // แสดงรายการคำอวยพรทั้งหมดในหน้าต่างเต็มจอ
   function renderAllWishesList() {
     const total = allWishesStore.length;
     if (wishCountBadge) {
@@ -1946,10 +1900,8 @@
     });
   }
 
-  // อีโมจิสุ่มนำหน้าชื่อคนเขียนในแถบคำอวยพรหน้าแรก
   const wishEmojis = ['🤍', '🌸', '✨', '🕊️', '💙', '🌿'];
 
-  // เพิ่มคำอวยพรลงในแถบวิ่งแบบสุ่มแถว (อีโมจินำหน้า + ชื่อตัวหนา + คำอวยพรตัวเล็ก)
   function addWishToRandomTrack(name, msg) {
     if (!tracks.length) return;
 
@@ -1972,7 +1924,6 @@
     tracks[randomIndex].appendChild(wishEl);
   }
 
-  // บันทึกคำอวยพรไม่ให้ซ้ำและอัปเดตทั้งแถบวิ่งและหน้ารวมคำอวยพร
   function registerWish(name, msg) {
     const wishKey = `${name}-${msg}`;
     if (displayedWishes.has(wishKey)) return false;
@@ -1984,7 +1935,6 @@
     return true;
   }
 
-  // เปิดและปิดหน้าแสดงคำอวยพรทั้งหมด
   function openAllWishesPage() {
     savedMainScrollY = window.scrollY;
     renderAllWishesList();
@@ -2009,7 +1959,6 @@
     }
   });
 
-  // ดึงคำอวยพรจาก Google Apps Script ทุก 3 วินาที
   async function fetchAndSyncWishes() {
     if (!GOOGLE_SCRIPT_URL) return;
     try {
@@ -2032,7 +1981,6 @@
   fetchAndSyncWishes();
   setInterval(fetchAndSyncWishes, 3000);
 
-  // ส่งคำอวยพรจากฟอร์ม
   const wishForm = document.getElementById('wishForm');
   const submitBtn = wishForm.querySelector('button[type="submit"]');
 
@@ -2075,7 +2023,7 @@
   });
 
   /* ==========================================================
-     7) ปุ่มเล่นและหยุดเพลงพื้นหลัง (เริ่มเล่นที่วินาทีที่ 9 เมื่อกดเล่น)
+     7) ปุ่มเล่นและหยุดเพลงพื้นหลัง
   ========================================================== */
   soundBtn.addEventListener('click', (e) => {
     e.stopPropagation();
@@ -2096,9 +2044,9 @@
       });
     }
   });
-  
+
   /* ==========================================================
-     รอจนกล่องสีขาวอ่อนๆ อยู่กลางจอแล้วค่อยเลื่อนข้อความเข้าจากซ้าย-ขวา
+     8) รอจนแถบข้อความอยู่กลางจอแล้วค่อยเลื่อนข้อความเข้าจากซ้าย-ขวา
   ========================================================== */
   (function initBlessingCenterTrigger() {
     const whiteBox = document.getElementById('blessingWhiteBox');
@@ -2106,7 +2054,7 @@
     const enEl = document.getElementById('blessingEnSlide');
     if (!whiteBox || !arEl || !enEl) return;
 
-    const START_DELAY_MS = 180; // หน่วงหลังกล่องเข้ากลางจอเล็กน้อย (มิลลิวินาที) ปรับให้ช้า/เร็วได้
+    const START_DELAY_MS = 180;
     let delayTimer = null;
     let isCurrentlyVisible = false;
 
@@ -2124,13 +2072,12 @@
         delayTimer = null;
       }
       arEl.style.opacity = '0';
-      arEl.style.transform = 'translateX(48px)';
+      arEl.style.transform = 'translateX(64px)';
 
       enEl.style.opacity = '0';
-      enEl.style.transform = 'translateX(-48px)';
+      enEl.style.transform = 'translateX(-64px)';
     }
 
-    // rootMargin: "-32% 0px -32% 0px" บีบโซนจับให้ตรงกับช่วงกึ่งกลางหน้าจอมากขึ้น
     const centerObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting && !isCurrentlyVisible) {
@@ -2151,20 +2098,57 @@
     centerObserver.observe(whiteBox);
   })();
 
+  /* ==========================================================
+     9) ละอองแสงหน้าปกซองจดหมาย
+  ========================================================== */
   (function initIntroParticles() {
     const container = document.getElementById('introParticles');
     if (!container) return;
     for (let i = 0; i < 38; i++) {
       const dot = document.createElement('span');
       dot.className = 'particle-dot';
-      const size = Math.random() * 4 + 2; // ขนาด 2px - 6px
+      const size = Math.random() * 4 + 2;
       dot.style.width = size + 'px';
       dot.style.height = size + 'px';
       dot.style.left = Math.random() * 100 + '%';
-      dot.style.animationDuration = (Math.random() * 7 + 6) + 's'; // ลอยช้าๆ 6-13 วินาที
+      dot.style.animationDuration = (Math.random() * 7 + 6) + 's';
       dot.style.animationDelay = (Math.random() * 6) + 's';
       container.appendChild(dot);
     }
+  })();
+
+  /* ==========================================================
+     10) ไฮไลต์เมนูด้านล่างตามส่วนที่กำลังเลื่อนดูอยู่
+  ========================================================== */
+  (function initBottomNavHighlight() {
+    const navLinks = document.querySelectorAll('.bottom-nav a[href^="#"]');
+    if (!navLinks.length) return;
+
+    const sectionMap = Array.from(navLinks).map(link => {
+      const id = link.getAttribute('href').slice(1);
+      return { link, section: document.getElementById(id) };
+    }).filter(item => item.section);
+
+    function updateActiveNav() {
+      const scrollCenter = window.scrollY + window.innerHeight * 0.45;
+      let currentActive = null;
+
+      sectionMap.forEach(({ link, section }) => {
+        const top = section.offsetTop;
+        const bottom = top + section.offsetHeight;
+        if (scrollCenter >= top && scrollCenter < bottom) {
+          currentActive = link;
+        }
+      });
+
+      navLinks.forEach(a => a.classList.remove('active-nav'));
+      if (currentActive) {
+        currentActive.classList.add('active-nav');
+      }
+    }
+
+    window.addEventListener('scroll', updateActiveNav, { passive: true });
+    updateActiveNav();
   })();
 
 </script>
