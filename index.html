@@ -2359,9 +2359,9 @@
           document.execCommand('copy');
           tempInput.remove();
         }
-        showFeedback('คัดลอกลิงก์การ์ดเชิญเรียบร้อยแล้วครับ');
+        showFeedback('คัดลอกลิงก์การ์ดเชิญเรียบร้อยแล้ว');
       } catch (e) {
-        showFeedback('กดค้างที่ลิงก์เพื่อคัดลอกได้เลยครับ');
+        showFeedback('กดค้างที่ลิงก์เพื่อคัดลอกได้เลย');
       }
     }
 
@@ -2380,7 +2380,7 @@
         if (navigator.share) {
           try {
             await navigator.share(shareData);
-            showFeedback('แชร์การ์ดเชิญเรียบร้อยแล้วครับ');
+            showFeedback('แชร์การ์ดเชิญเรียบร้อยแล้ว');
           } catch (err) {
             if (err && err.name !== 'AbortError') {
               copyInviteLink();
