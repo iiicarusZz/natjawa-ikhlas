@@ -1315,6 +1315,136 @@
     box-shadow: 0 14px 30px rgba(33, 66, 97, 0.13);
   }
 
+  /* ==========================================================
+     16) ส่วนแชร์การ์ดเชิญพร้อม QR Code ด้านล่างสุด
+  ========================================================== */
+  .share-card-box {
+    max-width: 440px;
+    margin: 0 auto;
+    padding: 1.75rem 1.35rem;
+    text-align: center;
+  }
+
+  .share-card-subhead {
+    font-size: 0.9rem;
+    color: var(--ink-sub);
+    margin: 0 0 1.25rem 0;
+  }
+
+  .qr-frame-box {
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    border-radius: 22px;
+    padding: 1.25rem 1rem;
+    box-shadow: 0 10px 24px rgba(33, 66, 97, 0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+  }
+
+  .qr-canvas-wrap {
+    width: 176px;
+    height: 176px;
+    padding: 10px;
+    background: #ffffff;
+    border-radius: 16px;
+    border: 1px solid var(--line-blue);
+    display: grid;
+    place-items: center;
+  }
+
+  .qr-canvas-wrap img,
+  .qr-canvas-wrap canvas {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+    border-radius: 8px;
+  }
+
+  .qr-scan-caption {
+    font-size: 0.85rem;
+    color: var(--ink-sub);
+    font-weight: 500;
+  }
+
+  .share-link-row {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.75);
+    border: 1px solid var(--line-blue);
+    border-radius: 14px;
+    padding: 0.55rem 0.7rem 0.55rem 0.9rem;
+  }
+
+  .share-link-text {
+    font-size: 0.8rem;
+    color: var(--ink-main);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+    flex: 1;
+    user-select: all;
+  }
+
+  .copy-link-btn {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    border: 1px solid var(--line-blue);
+    background: rgba(255, 255, 255, 0.95);
+    color: var(--ink-main);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .copy-link-btn:hover {
+    background: rgba(86, 135, 181, 0.16);
+    transform: scale(1.04);
+  }
+
+  .share-action-btn {
+    margin-top: 1.1rem;
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: var(--btn-grad);
+    color: #ffffff;
+    border: none;
+    padding: 0.88rem 1.5rem;
+    border-radius: 999px;
+    font-family: var(--font-body);
+    font-size: 0.98rem;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(56, 98, 138, 0.26);
+    transition: transform 0.2s ease, background 0.25s ease;
+  }
+
+  .share-action-btn:hover {
+    background: var(--btn-hover);
+    transform: translateY(-2px);
+  }
+
+  .share-feedback-msg {
+    margin-top: 0.55rem;
+    min-height: 1.2rem;
+    font-size: 0.82rem;
+    color: #2f5c85;
+    font-weight: 500;
+  }
+
 </style>
 </head>
 <body class="intro-active">
@@ -1568,6 +1698,39 @@
         <a href="tel:0872948114">087-2948114</a>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ==========================================================
+     6.5) ส่วนแชร์การ์ดเชิญ (Share Invitation & QR Code)
+========================================================== -->
+<section class="reveal" id="share-section">
+  <span class="section-kicker">✦ Share Invitation</span>
+  <h2 class="section-title">แชร์การ์ดเชิญ</h2>
+  <p class="share-card-subhead">เชิญแชร์การ์ดนี้ให้ผู้ร่วมงาน</p>
+  <div class="ornament-line"><span class="ornament-diamond"></span></div>
+
+  <div class="glass-panel share-card-box">
+    <div class="qr-frame-box">
+      <div class="qr-canvas-wrap" id="qrCodeBox">
+        <img id="inviteQrImg" alt="QR Code แชร์การ์ดเชิญ Natjawa & Ikhlas">
+      </div>
+      <span class="qr-scan-caption">สแกนเพื่อเปิดการ์ดเชิญ</span>
+    </div>
+
+    <div class="share-link-row">
+      <span class="share-link-text" id="shareUrlDisplay">กำลังโหลดลิงก์...</span>
+      <button type="button" class="copy-link-btn" id="copyShareLinkBtn" title="คัดลอกลิงก์" aria-label="คัดลอกลิงก์">
+        ❐
+      </button>
+    </div>
+
+    <button type="button" class="share-action-btn" id="nativeShareBtn">
+      <span>⤢</span>
+      <span>แชร์การ์ดเชิญ</span>
+    </button>
+
+    <div class="share-feedback-msg" id="shareFeedbackMsg" role="status" aria-live="polite"></div>
   </div>
 </section>
 
@@ -2149,6 +2312,85 @@
 
     window.addEventListener('scroll', updateActiveNav, { passive: true });
     updateActiveNav();
+  })();
+
+  /* ==========================================================
+     11) ระบบสร้าง QR Code คัดลอกลิงก์ และแชร์การ์ดเชิญ
+  ========================================================== */
+  (function initShareInvitation() {
+    const urlDisplay = document.getElementById('shareUrlDisplay');
+    const qrImg = document.getElementById('inviteQrImg');
+    const copyBtn = document.getElementById('copyShareLinkBtn');
+    const shareBtn = document.getElementById('nativeShareBtn');
+    const feedbackEl = document.getElementById('shareFeedbackMsg');
+
+    // หากเปิดผ่านไฟล์ (file://) จะตั้งลิงก์ตั้งต้นไว้ให้ก่อน แล้วอัปเดตตาม URL จริงอัตโนมัติเมื่ออยู่บนเว็บ/GitHub Pages
+    const currentHref = window.location.href;
+    const shareUrl = currentHref.startsWith('http')
+      ? currentHref.split('#')[0]
+      : 'https://natjawa-ikhlas-wedding.github.io/';
+
+    if (urlDisplay) {
+      urlDisplay.textContent = shareUrl;
+    }
+
+    if (qrImg) {
+      qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=6&color=1b344c&bgcolor=ffffff&data=${encodeURIComponent(shareUrl)}`;
+    }
+
+    function showFeedback(text) {
+      if (!feedbackEl) return;
+      feedbackEl.textContent = text;
+      clearTimeout(showFeedback._t);
+      showFeedback._t = setTimeout(() => {
+        feedbackEl.textContent = '';
+      }, 2600);
+    }
+
+    async function copyInviteLink() {
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(shareUrl);
+        } else {
+          const tempInput = document.createElement('input');
+          tempInput.value = shareUrl;
+          document.body.appendChild(tempInput);
+          tempInput.select();
+          document.execCommand('copy');
+          tempInput.remove();
+        }
+        showFeedback('คัดลอกลิงก์การ์ดเชิญเรียบร้อยแล้วครับ');
+      } catch (e) {
+        showFeedback('กดค้างที่ลิงก์เพื่อคัดลอกได้เลยครับ');
+      }
+    }
+
+    if (copyBtn) {
+      copyBtn.addEventListener('click', copyInviteLink);
+    }
+
+    if (shareBtn) {
+      shareBtn.addEventListener('click', async () => {
+        const shareData = {
+          title: 'Wedding Invitation — Natjawa & Ikhlas',
+          text: 'ขอเรียนเชิญร่วมงานมงคลสมรส Natjawa & Ikhlas วันที่ 9 มกราคม 2570 ณ รร.แสงธรรมวิทยามูลนิธิ (จะนะ)',
+          url: shareUrl
+        };
+
+        if (navigator.share) {
+          try {
+            await navigator.share(shareData);
+            showFeedback('แชร์การ์ดเชิญเรียบร้อยแล้วครับ');
+          } catch (err) {
+            if (err && err.name !== 'AbortError') {
+              copyInviteLink();
+            }
+          }
+        } else {
+          copyInviteLink();
+        }
+      });
+    }
   })();
 
 </script>
